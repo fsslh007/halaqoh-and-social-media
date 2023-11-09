@@ -16,8 +16,12 @@
                         {{ __('Home') }}
                     </x-jet-nav-link>
 
-                    <x-jet-nav-link href="{{ route('halaqah') }}" :active="request()->routeIs('halaqah')">
+                    <x-jet-nav-link href="{{ route('rooms.halaqah') }}" :active="request()->routeIs('rooms.halaqah')">
                         {{ __('Halaqah') }}
+                    </x-jet-nav-link>
+
+                    <x-jet-nav-link href="{{ route('rooms.create') }}" :active="request()->routeIs('rooms.create')">
+                        {{ __('Create Room') }}
                     </x-jet-nav-link>
                                         
                     <x-jet-nav-link href="{{ route('feeds') }}" :active="request()->routeIs('feeds')">
