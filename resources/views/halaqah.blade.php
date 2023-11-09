@@ -4,4 +4,7 @@
             {{ __('Halaqah') }}
         </h2>
     </x-slot>
+
+    <livewire:rooms.halaqah />
+
 </x-app-layout>
