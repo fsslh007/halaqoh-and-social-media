@@ -27,6 +27,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
         return view('home');
     })->name('home');
 
+    Route::get('/halaqah', "App\Http\Controllers\HalaqahController@index")->name('halaqah');
     Route::resource('/posts', "App\Http\Controllers\PostController")->names('posts');
     Route::get('/feeds', "App\Http\Controllers\PostController@followers")->name('feeds');
     Route::resource('/manage/users', "App\Http\Controllers\UserController")->except(['create', 'show', 'store'])->names('users');
