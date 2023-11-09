@@ -5,5 +5,6 @@
         </h2>
     </x-slot>
 
+    <livewire:rooms.create />
 
 </x-app-layout>
