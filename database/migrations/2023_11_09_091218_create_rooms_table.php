@@ -15,6 +15,12 @@ return new class extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('meeting_time')->nullable();
+            $table->string('password')->nullable();
+            $table->text('description')->nullable();
+            $table->string('meeting_url')->nullable();
+            $table->string('file_path')->nullable(); // Assuming you want to store the file path
             $table->timestamps();
         });
     }
