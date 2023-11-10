@@ -5,5 +5,6 @@
         </h2>
     </x-slot>
 
-    <!-- Rest of your blade content -->
+    <livewire:rooms.halaqahroom />
+
 </x-app-layout>
