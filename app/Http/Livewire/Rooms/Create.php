@@ -56,6 +56,6 @@ class Create extends Component
 
         session()->flash('success', 'Room created successfully');
 
-        return redirect('your_redirect_route'); // Change 'your_redirect_route' to the actual route
+        return redirect('rooms'); // Change 'your_redirect_route' to the actual route
     }
 }
