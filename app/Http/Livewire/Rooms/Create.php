@@ -6,6 +6,7 @@ namespace App\Http\Livewire\Rooms;
 
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use App\Models\Room;
 
 class Create extends Component
 {
@@ -43,7 +44,15 @@ class Create extends Component
     {
         $this->validate();
 
-        // Add your logic for creating the room here
+    // Save the room to the database
+    Room::create([
+        'name' => $this->name,
+        'meeting_time' => $this->meetingTime,
+        'password' => bcrypt($this->password), // Make sure to hash passwords
+        'description' => $this->description,
+        'leaving_url' => $this->leavingUrl,
+        // Add other fields as needed
+    ]);
 
         session()->flash('success', 'Room created successfully');
 

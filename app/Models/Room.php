@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Room extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'meeting_time',
+        'password',
+        'description',
+        'leaving_url',
+        // Add other fields as needed
+    ];
 }
