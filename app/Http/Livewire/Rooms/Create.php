@@ -56,6 +56,16 @@ class Create extends Component
 
         session()->flash('success', 'Room created successfully');
 
-        return redirect('rooms'); // Change 'your_redirect_route' to the actual route
+        // Store the submitted data in the session
+        session(['submittedData' => [
+            'name' => $this->name,
+            'meetingTime' => $this->meetingTime,
+            'password' => $this->password,
+            'description' => $this->description,
+            'leavingUrl' => $this->leavingUrl,
+            // Add other fields as needed
+        ]]);
+
+        return redirect('/rooms'); // Change 'your_redirect_route' to the actual route
     }
 }
