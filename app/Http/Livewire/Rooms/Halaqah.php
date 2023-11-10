@@ -19,4 +19,12 @@ class Halaqah extends Component
     {
         return view('livewire.rooms.halaqah');
     }
+
+    public function joinHalaqah($roomId, $classroomName)
+    {
+        // Implement any logic or validations needed
+    
+        // Redirect to the specified URL
+        return redirect("/rooms/$roomId/$classroomName");
+    }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Room;
 use App\Http\Requests\StoreRoomRequest;
 use App\Http\Requests\UpdateRoomRequest;
+use Illuminate\View\View;
 
 class RoomController extends Controller
 {
@@ -33,9 +34,20 @@ class RoomController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function halaqah()
+
+    /**
+     * Show the specified Halaqah room.
+     *
+     * @param  string  $username
+     * @return \Illuminate\Http\Response
+     */
+    public function rooms($id, $name): View
     {
-        return view('rooms.halaqah');
+        // Example logic to retrieve the classroom name based on the ID
+        $classroom = Room::findOrFail($id);
+        $classroomName = $classroom->name;
+
+        return view('rooms.halaqahroom', compact('classroomName'));
     }
 
     /**

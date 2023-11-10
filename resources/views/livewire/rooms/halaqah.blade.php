@@ -19,7 +19,7 @@
 
                     <!-- Join Halaqah Button -->
                     <div class="mt-4">
-                        <x-jet-button wire:click="joinHalaqah('{{ $room->id }}')">
+                        <x-jet-button wire:click="joinHalaqah('{{ $room->id }}', '{{ $room->name }}')">
                             {{ __('Join Halaqah') }}
                         </x-jet-button>
                     </div>
