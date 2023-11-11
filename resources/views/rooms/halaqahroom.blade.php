@@ -5,6 +5,6 @@
         </h2>
     </x-slot>
 
-    <livewire:rooms.halaqahroom />
+    <livewire:rooms.halaqahroom :roomId="$id" :classroomName="$classroomName" />
 
 </x-app-layout>

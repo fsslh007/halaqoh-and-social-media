@@ -46,8 +46,8 @@ class RoomController extends Controller
         // Example logic to retrieve the classroom name based on the ID
         $classroom = Room::findOrFail($id);
         $classroomName = $classroom->name;
-
-        return view('rooms.halaqahroom', compact('classroomName'));
+    
+        return view('rooms.halaqahroom', compact('id', 'classroomName'));
     }
 
     /**
