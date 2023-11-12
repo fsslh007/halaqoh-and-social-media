@@ -54,9 +54,7 @@ class RoomPolicy
      */
     public function update(User $user, Room $room)
     {
-        return auth()->user()->role_id === 2 || $room->user->id === auth()->id()
-                    ? Response::allow()
-                    : Response::deny('You do not own this Halaqah room.');
+        //
     }
 
     /**
