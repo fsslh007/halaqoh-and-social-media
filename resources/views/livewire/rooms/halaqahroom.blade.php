@@ -7,6 +7,18 @@
             {{-- Small square for Classroom Name --}}
             <div class="p-4 bg-white shadow-md rounded-lg col-span-2 mx-2 text-center">
                 <h1 style="font-size: 1.5rem; font-weight: bold;" class="mb-2">Classroom: {{ $classroomName }}</h1>
+
+                    <!-- Show owner created Halaqah -->
+                    <div class="w-full flex-none mb-2 text-xs text-blue-700 font-medium" wire:offline.class.remove="text-blue-700" wire:offline.class="text-gray-400">
+                        @if ($room->user)
+                            <a href="{{ route('profile', ['username' => $room->user->username]) }}">
+                                <img class="inline-block object-cover w-8 h-8 mr-1 text-white rounded-full shadow-sm cursor-pointer" wire:offline.class="filter grayscale" src="{{ $room->user->profile_photo_url }}" alt="{{ $room->user->name }}" />
+                                Created by {{ '@' . $room->user->username }}
+                            </a>
+                        @else
+                            <span class="text-gray-500">Creator information not available</span>
+                        @endif
+                    </div>
             </div>
             
             {{-- Small square for Meeting Time, Description, and Leaving URL --}}
