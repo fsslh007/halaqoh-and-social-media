@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('password')->nullable();
             $table->text('description')->nullable();
             $table->string('leaving_url')->nullable();
-            $table->string('file_path')->nullable(); // Assuming you want to store the file path
             $table->timestamps();
         });
     }

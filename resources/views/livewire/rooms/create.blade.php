@@ -53,39 +53,6 @@
 
             <!-- Add more form fields as needed -->
 
-            <!-- File Upload -->
-            <div class="mb-4">
-                <x-jet-label for="file" value="{{ __('File') }}" />
-                <input type="file" id="file" name="file" wire:model="file" class="mt-1 p-2 border rounded-md w-full">
-                @error('file') <span class="text-red-500">{{ $message }}</span> @enderror
-            </div>
-
-            <!-- Preview Section (similar to the post creation form) -->
-            @if($file)
-            <div class="mt-4">
-                <x-jet-label value="{{ __('Preview :') }}" />
-                <!-- Adjust based on file type -->
-                @if(in_array($file->extension(), $this->imageFormats))
-                    <img class="p-3 max-w-full h-auto" src="{{ $file->temporaryUrl() }}" oncontextmenu="return false;">
-                @elseif(in_array($file->extension(), $this->videoFormats))
-                    <video controls crossorigin playsinline oncontextmenu="return false;" controlsList="nodownload" class="max-w-full h-auto rounded-lg filter">
-                        <!-- Video files -->
-                        <source src="{{ $file->temporaryUrl() }}" type="video/{{ $file->extension() }}" size="576">
-                        <!-- Fallback for browsers that don't support the <video> element -->
-                        <a href="{{ $file->temporaryUrl() }}" download>Download</a>
-                    </video>
-                @else
-                    <p class="text-red-700 text-sm my-3">Invalid File selected. You can only upload {{ implode(', ',  array_merge($this->imageFormats, $this->videoFormats)) }} file types. </p>
-                @endif
-            </div>
-            @endif
-
-            <!-- Progress Bar -->
-            <div wire:loading class="my-3" wire:target="file">Uploading...</div>
-            <div x-show="isUploading" class="my-2">
-                <progress max="100" x-bind:value="progress"></progress>
-            </div>
-
             <!-- Submit Button -->
             <div class="flex items-center justify-end mt-4">
                 <x-jet-button class="ml-4">
