@@ -55,7 +55,7 @@
                     @endcan
 
                 
-                @include('livewire.rooms.edit-room-modal')
+                @include('elements.edit-room-modal')
 
                 <!-- Include the Delete Room Modal -->
                 @include('elements.delete-room-modal')
