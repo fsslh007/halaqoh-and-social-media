@@ -46,6 +46,12 @@ class Halaqahroom extends Component
         // Find the room to delete
         $room = Room::findOrFail($this->roomId);
 
+        // Check if the authenticated user is the owner of the room
+        if (auth()->user()->id !== $room->user_id) {
+            session()->flash('error', 'You do not have permission to delete this classroom.');
+            return redirect()->route('rooms.index');
+        }
+
         // Your delete logic here...
 
         try {
@@ -57,6 +63,7 @@ class Halaqahroom extends Component
 
         // Redirect to the "/rooms" page using a named route
         return redirect()->route('rooms.index');
+        
         $this->isOpenDeleteRoomModal = false;
     }
 }
