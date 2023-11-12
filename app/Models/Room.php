@@ -9,6 +9,9 @@ class Room extends Model
 {
     use HasFactory;
 
+    // Enable lazy loading for the user relationship
+    protected $with = ['user'];
+
     protected $fillable = [
         'name',
         'user_id',
@@ -18,4 +21,9 @@ class Room extends Model
         'leaving_url',
         // Add other fields as needed
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

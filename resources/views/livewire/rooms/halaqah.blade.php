@@ -15,6 +15,19 @@
                     <div class="text-center mb-4 whitespace-pre-line">
                         <p><strong>Leaving URL:</strong> {{ wordwrap($room->leaving_url, 45, "\n", true) }}</p>
                     </div>
+
+                    <!-- Show owner created Halaqah -->
+                    <div class="w-full flex-none mb-2 text-center text-xs text-blue-700 font-medium" wire:offline.class.remove="text-blue-700" wire:offline.class="text-gray-400">
+                        @if ($room->user)
+                            <a href="{{ route('profile', ['username' => $room->user->username]) }}">
+                                <img class="inline-block object-cover w-8 h-8 mr-1 text-white rounded-full shadow-sm cursor-pointer" wire:offline.class="filter grayscale" src="{{ $room->user->profile_photo_url }}" alt="{{ $room->user->name }}" />
+                                Created by {{ '@' . $room->user->username }}
+                            </a>
+                        @else
+                            <span class="text-gray-500">Creator information not available</span>
+                        @endif
+                    </div>
+
                     <!-- Add other fields as needed -->
 
                     <!-- Join Halaqah Button -->
