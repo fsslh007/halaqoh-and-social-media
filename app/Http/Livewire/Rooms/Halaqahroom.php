@@ -14,6 +14,21 @@ class Halaqahroom extends Component
     public $isOpenDeleteRoomModal = false;
     public $isOpenEditRoomModal = false;
 
+    // Initialize the $room property with empty values
+    public function data()
+    {
+        return [
+            'room' => [
+                'name' => '',
+                'meeting_time' => '',
+                'description' => '',
+                'leaving_url' => '',
+                'password' => '',
+                // Additional properties as needed
+            ],
+        ];
+    }
+
     public function mount($roomId, $classroomName)
     {
         $this->roomId = $roomId;
@@ -35,6 +50,28 @@ class Halaqahroom extends Component
     public function EditRoom($roomId)
     {
         // Your edit logic here...
+        $this->isOpenEditRoomModal = false;
+    }
+
+    public function updateRoom()
+    {
+        // Validate the updated room fields
+        $this->validate([
+            'room.name' => 'required',
+            'room.meeting_time' => 'required',
+            'room.description' => 'required',
+            'room.leaving_url' => 'required',
+            'room.password' => 'required',
+            // Additional validation rules as needed
+        ]);
+
+        // Update the room
+        $this->room->save();
+
+        // Flash a success message
+        session()->flash('success', 'Classroom updated successfully');
+
+        // Close the modal
         $this->isOpenEditRoomModal = false;
     }
 

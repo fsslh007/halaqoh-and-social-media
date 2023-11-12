@@ -1,3 +1,5 @@
+<!-- resources/views/elements/delete-room-modal.blade.php -->
+
 <div>
     <x-jet-dialog-modal wire:model="isOpenEditRoomModal">
         <x-slot name="title">
@@ -13,7 +15,7 @@
                 {{ __('Cancel') }}
             </x-jet-secondary-button>
 
-            <x-jet-danger-button wire:click="EditRoom" wire:loading.attr="disabled">
+            <x-jet-danger-button wire:click="deleteRoom" wire:loading.attr="disabled">
                 {{ __('Delete') }}
             </x-jet-danger-button>
         </x-slot>
