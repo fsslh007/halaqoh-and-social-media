@@ -12,6 +12,7 @@ class Halaqahroom extends Component
     public $room;
     public $editRoomId;
     public $isOpenDeleteRoomModal = false;
+    public $isOpenEditRoomModal = false;
 
     public function mount($roomId, $classroomName)
     {
@@ -25,15 +26,16 @@ class Halaqahroom extends Component
         return view('livewire.rooms.halaqahroom');
     }
 
-    public function editHalaqah($roomId)
+    public function showEditRoomModal($roomId)
     {
         // Your edit logic here...
+        $this->isOpenEditRoomModal = true;
+    }
 
-        // Set the editRoomId variable
-        $this->editRoomId = $roomId;
-
-        // Redirect to the "/rooms" page using a named route
-        return redirect()->route('rooms.index');
+    public function EditRoom($roomId)
+    {
+        // Your edit logic here...
+        $this->isOpenEditRoomModal = false;
     }
 
     public function showDeleteRoomModal($roomId)
