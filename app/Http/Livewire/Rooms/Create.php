@@ -6,6 +6,7 @@ namespace App\Http\Livewire\Rooms;
 
 use Livewire\Component;
 use App\Models\Room;
+use Auth;
 
 class Create extends Component
 {
@@ -37,6 +38,7 @@ class Create extends Component
     // Save the room to the database
     Room::create([
         'name' => $this->name,
+        'user_id' => Auth::id(),
         'meeting_time' => $this->meetingTime,
         'password' => bcrypt($this->password), // Make sure to hash passwords
         'description' => $this->description,
