@@ -43,6 +43,7 @@
                     </button>
 
                     <!-- Delete Post Button -->
+                    @can('delete', $room)
                     <button
                         id="delete_room_{{ $room->id }}"
                         wire:click="showDeleteRoomModal({{ $room->id }})"
@@ -50,6 +51,7 @@
                     >
                         {{ __('Delete Classroom') }}
                     </button>
+                    @endcan
 
                 <!-- Include the Delete Room Modal -->
                 @include('elements.delete-room-modal')

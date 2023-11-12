@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\Room;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Auth\Access\Response;
 
 class RoomPolicy
 {
@@ -65,7 +66,9 @@ class RoomPolicy
      */
     public function delete(User $user, Room $room)
     {
-        //
+        return auth()->user()->role_id === 2 || $room->user->id === auth()->id()
+                    ? Response::allow()
+                    : Response::deny('You do not own this Halaqah room.');
     }
 
     /**
