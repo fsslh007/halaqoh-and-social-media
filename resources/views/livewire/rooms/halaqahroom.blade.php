@@ -32,15 +32,16 @@
                 
                 <div class="mt-4 relative">
 
-                    <!-- Edit Halaqah Button -->
-                    <button 
-                        wire:click="editHalaqah('{{ $editRoomId }}')"
-                        class="bg-black text-white px-4 py-2 rounded-md focus:outline-none relative z-10"
-                        style="position: relative; z-index: 10; background-color: black;"
-                    >
-                        {{ __('Edit Halaqah') }}
-                        <div class="absolute top-0 left-0 h-full w-full bg-black opacity-75 z-0"></div>
-                    </button>
+                <!-- Edit Halaqah Button -->
+                <button
+                    id="edit_room_{{ $room->id }}"
+                    wire:click="showEditRoomModal({{ $room->id }})"
+                    class="bg-black text-white px-4 py-2 rounded-md focus:outline-none relative z-10"
+                    style="position: relative; z-index: 10; background-color: black;"
+                >
+                    {{ __('Edit Halaqah') }}
+                    <div class="absolute top-0 left-0 h-full w-full bg-black opacity-75 z-0"></div>
+                </button>
 
                     <!-- Delete Post Button -->
                     @can('delete', $room)
@@ -52,6 +53,9 @@
                         {{ __('Delete Classroom') }}
                     </button>
                     @endcan
+
+                
+                @include('livewire.rooms.edit-room-modal')
 
                 <!-- Include the Delete Room Modal -->
                 @include('elements.delete-room-modal')
