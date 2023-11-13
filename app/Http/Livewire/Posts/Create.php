@@ -39,7 +39,7 @@ class Create extends Component
     public function updatedFile()
     {
         $this->validate([
-            'file' => 'mimes:' . implode(',', array_merge($this->imageFormats, $this->videoFormats)) . '|max:2048',
+            'file' => 'mimes:' . implode(',', array_merge($this->imageFormats, $this->videoFormats)) . '|max:2000000',
         ]);
     }
 
@@ -49,7 +49,7 @@ class Create extends Component
             'title' => 'required|max:50',
             'location' => 'nullable|string|max:60',
             'body' => 'required|max:1000',
-            'file' => 'nullable|mimes:' . implode(',', array_merge($this->imageFormats, $this->videoFormats)) . '|max:2048',
+            'file' => 'nullable|mimes:' . implode(',', array_merge($this->imageFormats, $this->videoFormats)) . '|max:2000000',
         ]);
 
         $post = Post::create([
