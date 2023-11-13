@@ -156,6 +156,6 @@ class Halaqahroom extends Component
     // New method to fetch uploaded files
     public function getUploadedFiles()
     {
-        $this->uploadedFiles = $this->room->uploadFiles; // Fixed relationship name
+        $this->uploadedFiles = $this->room->uploadFiles()->with('user')->get();    
     }
 }
