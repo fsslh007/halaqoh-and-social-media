@@ -1,11 +1,11 @@
 <!-- resources/views/livewire/rooms/halaqahroom.blade.php -->
 
-<div class="flex items-center justify-center h-screen mt-4 mx-4">
+<div class="flex flex-col items-center justify-center min-h-screen mx-4">
     <div class="p-8 rounded-lg w-full max-w-2xl">
         {{-- Big square covering all details --}}
-        <div class="grid grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {{-- Small square for Classroom Name --}}
-            <div class="p-4 bg-white shadow-md rounded-lg col-span-2 mx-2 text-center">
+            <div class="p-4 bg-white shadow-md rounded-lg col-span-2 sm:col-span-1 mx-2 text-center">
                 <h1 style="font-size: 1.5rem; font-weight: bold;" class="mb-2">HALAQAH: {{ $classroomName }}</h1>
             </div>
 
@@ -64,7 +64,7 @@
         </div>
 
         {{-- Small square for Classroom Name --}}
-        <div class="p-4 bg-white shadow-md rounded-lg col-span-2 mx-2 mt-4 text-center">
+        <div class="p-4 bg-white shadow-md rounded-lg col-span-2 sm:col-span-1 mx-2 mt-4 text-center">
             <h1 style="font-size: 1.5rem; font-weight: bold;" class="mb-2">ADDITIONAL FILES</h1>
         </div>
 
