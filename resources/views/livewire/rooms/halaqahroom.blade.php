@@ -33,6 +33,7 @@
                 <div class="mt-4 relative">
 
                 <!-- Edit Halaqah Button -->
+                @can('update', $room)
                 <button
                     id="edit_room_{{ $room->id }}"
                     wire:click="showEditRoomModal({{ $room->id }})"
@@ -42,6 +43,7 @@
                     {{ __('Edit Halaqah') }}
                     <div class="absolute top-0 left-0 h-full w-full bg-black opacity-75 z-0"></div>
                 </button>
+                @endcan
 
                     <!-- Delete Post Button -->
                     @can('delete', $room)
@@ -54,11 +56,21 @@
                     </button>
                     @endcan
 
-                
-                @include('elements.edit-room-modal')
+                <!-- Include the Edit Room Modal -->
+                @include('livewire.rooms.edit-room-modal')
 
                 <!-- Include the Delete Room Modal -->
                 @include('elements.delete-room-modal')
+
+                <!-- Script refresh page after Edit Halaqah -->
+                <script>
+                    document.addEventListener('livewire:load', function () {
+                        Livewire.on('refreshLivewireComponent', function () {
+                            window.location.reload();
+                        });
+                    });
+                </script>
+
                 </div>
             </div>
         </div>

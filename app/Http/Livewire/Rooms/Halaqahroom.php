@@ -29,6 +29,16 @@ class Halaqahroom extends Component
         ];
     }
 
+    // Validation rules
+    protected $rules = [
+        'room.name' => 'required',
+        'room.meeting_time' => 'required',
+        'room.description' => 'required',
+        'room.leaving_url' => 'required',
+        'room.password' => 'required', // Add validation rule for the password field
+        // Additional validation rules as needed
+    ];
+
     public function mount($roomId, $classroomName)
     {
         $this->roomId = $roomId;
@@ -47,12 +57,6 @@ class Halaqahroom extends Component
         $this->isOpenEditRoomModal = true;
     }
 
-    public function EditRoom($roomId)
-    {
-        // Your edit logic here...
-        $this->isOpenEditRoomModal = false;
-    }
-
     public function updateRoom()
     {
         // Validate the updated room fields
@@ -64,16 +68,20 @@ class Halaqahroom extends Component
             'room.password' => 'required',
             // Additional validation rules as needed
         ]);
-
+    
         // Update the room
         $this->room->save();
-
+    
         // Flash a success message
         session()->flash('success', 'Classroom updated successfully');
-
+    
         // Close the modal
         $this->isOpenEditRoomModal = false;
+    
+        // Refresh the Livewire component
+        $this->emit('refreshLivewireComponent');
     }
+    
 
     public function showDeleteRoomModal($roomId)
     {
