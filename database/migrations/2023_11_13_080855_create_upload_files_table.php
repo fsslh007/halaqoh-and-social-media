@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('upload_files', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained(); // Assuming 'users' table exists
+            $table->string('file_name');
+            $table->string('path');
             $table->timestamps();
         });
     }
