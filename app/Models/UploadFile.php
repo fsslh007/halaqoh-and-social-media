@@ -24,4 +24,9 @@ class UploadFile extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function room()
+    {
+        return $this->belongsTo(Room::class);
+    }
 }

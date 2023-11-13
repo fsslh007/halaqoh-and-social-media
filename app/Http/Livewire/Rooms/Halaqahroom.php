@@ -4,15 +4,19 @@ namespace App\Http\Livewire\Rooms;
 
 use Livewire\Component;
 use App\Models\Room;
+use Livewire\WithFileUploads;
 
 class Halaqahroom extends Component
 {
+    use WithFileUploads;
+
     public $roomId;
     public $classroomName;
     public $room;
     public $editRoomId;
     public $isOpenDeleteRoomModal = false;
     public $isOpenEditRoomModal = false;
+    public $file;
 
     // Initialize the $room property with empty values
     public function data()
@@ -35,7 +39,8 @@ class Halaqahroom extends Component
         'room.meeting_time' => 'required',
         'room.description' => 'required',
         'room.leaving_url' => 'required',
-        'room.password' => 'required', // Add validation rule for the password field
+        'room.password' => 'required',
+        'file' => 'nullable|file|max:10240',
         // Additional validation rules as needed
     ];
 
@@ -68,20 +73,22 @@ class Halaqahroom extends Component
             'room.password' => 'required',
             // Additional validation rules as needed
         ]);
-    
+
         // Update the room
         $this->room->save();
-    
+
+        // Handle file upload
+        $this->uploadFile();
+
         // Flash a success message
         session()->flash('success', 'Classroom updated successfully');
-    
+
         // Close the modal
         $this->isOpenEditRoomModal = false;
-    
+
         // Refresh the Livewire component
         $this->emit('refreshLivewireComponent');
     }
-    
 
     public function showDeleteRoomModal($roomId)
     {
@@ -105,5 +112,30 @@ class Halaqahroom extends Component
         // Redirect to the "/rooms" page using a named route
         return redirect()->route('rooms.index');
         $this->isOpenDeleteRoomModal = false;
+    }
+
+    public function uploadFile()
+    {
+        $this->validate([
+            'file' => 'nullable|file|max:10240', // Adjust the max file size as needed
+        ]);
+    
+        if ($this->file) {
+            // Store the uploaded file
+            $file = $this->file->store('upload-files', 'public');
+    
+            // Create a new UploadFile record
+            $this->room->uploadFiles()->create([
+                'user_id' => auth()->id(),
+                'file_name' => $this->file->getClientOriginalName(),
+                'path' => $file,
+            ]);
+    
+            // Clear the file input
+            $this->file = null;
+    
+            // Refresh the Livewire component
+            $this->emit('refreshLivewireComponent');
+        }
     }
 }

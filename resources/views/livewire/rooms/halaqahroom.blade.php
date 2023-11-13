@@ -71,6 +71,38 @@
                     });
                 </script>
 
+
+                {{-- Small square for File Upload --}}
+                <div class="p-4 bg-white shadow-md rounded-lg mx-2">
+                    <h2 style="font-size: 1.5rem; font-weight: bold;" class="mb-2">File Upload</h2>
+                    
+                    <!-- Livewire File Upload Form -->
+                    <form wire:submit.prevent="uploadFile" enctype="multipart/form-data">
+                        <div class="mb-4">
+                            <x-jet-label for="file" value="{{ __('Choose File') }}" />
+                            <x-jet-input id="file" type="file" class="mt-1 block w-full" wire:model="file" />
+                            <x-jet-input-error for="file" class="mt-2" />
+                        </div>
+                        
+                        <div class="flex items-center justify-end mt-4">
+                            <x-jet-button type="submit" wire:loading.attr="disabled">
+                                {{ __('Upload File') }}
+                            </x-jet-button>
+                        </div>
+                    </form>
+
+                    <!-- Show uploaded files -->
+                    @if($room->files)
+                        <h2 class="mt-4 mb-2">Uploaded Files</h2>
+                        <ul>
+                            @foreach($room->files as $file)
+                                <li>{{ $file->file_name }}</li>
+                                <!-- You can add more details if needed -->
+                            @endforeach
+                        </ul>
+                    @endif
+                </div>
+
                 </div>
             </div>
         </div>

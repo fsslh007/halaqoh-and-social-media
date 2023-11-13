@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('upload_files', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained(); // Assuming 'users' table exists
+            $table->foreignId('room_id')->constrained(); // This line adds the foreign key constraint
+            $table->foreignId('user_id')->constrained();
             $table->string('file_name');
             $table->string('path');
             $table->timestamps();
