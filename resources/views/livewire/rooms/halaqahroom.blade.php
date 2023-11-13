@@ -91,16 +91,36 @@
                         </div>
                     </form>
 
-                    <!-- Show uploaded files -->
-                    @if($room->files)
+                    <!-- Show uploaded files 
+                    @if($uploadedFiles && $uploadedFiles->count() > 0)
                         <h2 class="mt-4 mb-2">Uploaded Files</h2>
                         <ul>
-                            @foreach($room->files as $file)
+                            @foreach($uploadedFiles as $file)
                                 <li>{{ $file->file_name }}</li>
-                                <!-- You can add more details if needed -->
                             @endforeach
                         </ul>
+                    @endif-->
+
+                    <!-- Add this section to display uploaded files -->
+                    @if ($uploadedFiles && $uploadedFiles->count() > 0)
+                        <div class="mt-4">
+                            <h2 class="text-lg font-semibold mb-2">Uploaded Files:</h2>
+                            <ul>
+                                @foreach ($uploadedFiles as $file)
+                                    <li>
+                                        <a href="{{ asset('storage/' . $file->path) }}" target="_blank" class="text-red-500 hover:underline">
+                                            {{ $file->file_name }}
+                                        </a>
+                                        <a href="{{ asset('storage/' . $file->path) }}" target="_blank">
+                                            <i class="fas fa-external-link-alt ml-2"></i> <!-- Add an icon for clarity -->
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
                     @endif
+
+
                 </div>
 
                 </div>
