@@ -5,12 +5,12 @@
         {{-- Big square covering all details --}}
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {{-- Small square for Classroom Name --}}
-            <div class="p-4 bg-white shadow-md rounded-lg col-span-2 sm:col-span-1 mx-2 text-center">
+            <div class="p-4 bg-white shadow-md rounded-lg col-span-2 sm:col-span-1 mt-1 mx-2 text-center">
                 <h1 style="font-size: 1.5rem; font-weight: bold;" class="mb-2">HALAQAH: {{ $classroomName }}</h1>
             </div>
 
             {{-- Small square for Meeting Time, Description, and Leaving URL --}}
-            <div class="p-4 bg-white shadow-md rounded-lg  mx-2">
+            <div class="p-4 bg-white shadow-md rounded-lg  mt-1 mx-2">
                 <!-- Show owner created Halaqah -->
                 <div class="w-full flex-none mb-2 text-xs text-blue-700 font-medium" wire:offline.class.remove="text-blue-700" wire:offline.class="text-gray-400">
                     @if ($room->user)
@@ -97,10 +97,10 @@
                                     File Name
                                 </th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Username
+                                    Uploaded By
                                 </th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Upload Date
+                                    Uploaded Date
                                 </th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Actions
