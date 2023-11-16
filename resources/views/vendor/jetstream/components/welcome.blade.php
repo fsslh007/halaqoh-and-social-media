@@ -6,6 +6,6 @@
 	
 </style>
 
-     <livewire:posts.view :type="null" />
+     <livewire:posts.view :type="'followers'" />
     
 </div>
