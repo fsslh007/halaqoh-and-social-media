@@ -38,7 +38,7 @@ class PostController extends Controller
      */
     public function create(): View|Factory|Application
     {
-        return view('post.create');
+        //
     }
 
     /**

@@ -26,11 +26,7 @@
                                         
                     <x-jet-nav-link href="{{ route('feeds') }}" :active="request()->routeIs('feeds')">
                         {{ __('Feeds') }}
-                    </x-jet-nav-link>
-                    
-                    <x-jet-nav-link href="{{ route('posts.create') }}" :active="request()->routeIs('posts.create')">
-                        {{ __('Create Post') }}
-                    </x-jet-nav-link>
+                    </x-jet-nav-link>                    
                     
                     <x-jet-nav-link href="{{ route('posts.index') }}" :active="request()->routeIs('posts.index')">
                         {{ __('My Posts') }}
@@ -178,11 +174,7 @@
             
             <x-jet-responsive-nav-link href="{{ route('feeds') }}" :active="request()->routeIs('feeds')">
                 {{ __('Feeds') }}
-            </x-jet-responsive-nav-link>
-            
-            <x-jet-responsive-nav-link href="{{ route('posts.create') }}" :active="request()->routeIs('posts.create')">
-                {{ __('Create post') }}
-            </x-jet-responsive-nav-link>
+            </x-jet-responsive-nav-link> 
             
             <x-jet-responsive-nav-link href="{{ route('posts.index') }}">
                 {{ __('My Posts') }}
