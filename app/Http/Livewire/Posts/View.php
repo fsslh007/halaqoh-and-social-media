@@ -11,10 +11,11 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Livewire\WithFileUploads;
 
 class View extends Component
 {
-    use WithPagination;
+    use WithPagination, WithFileUploads;
 
     public $comments = [];
 
@@ -31,6 +32,8 @@ class View extends Component
     public $isOpenCommentModal = false;
 
     public $isOpenDeletePostModal = false;
+    
+    public $isOpenCreatePostModal = false;
 
     public function mount($type = null)
     {
@@ -40,8 +43,17 @@ class View extends Component
     public function render()
     {
         $posts = $this->setQuery();
+        $user = Auth::user(); // Retrieve authenticated user
+    
+        return view('livewire.posts.view', [
+            'posts' => $posts,
+            'user' => $user, // Pass the user data to the view
+        ]);
+    }
 
-        return view('livewire.posts.view', ['posts' => $posts]);
+        public function openCreatePostModal()
+    {
+        $this->isOpenCreatePostModal = true;
     }
 
     public function incrementLike(Post $post)
