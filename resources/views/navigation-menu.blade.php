@@ -16,6 +16,10 @@
                         {{ __('Home') }}
                     </x-jet-nav-link>
 
+                    <x-jet-nav-link href="{{ route('feeds') }}" :active="request()->routeIs('feeds')">
+                        {{ __('Feeds') }}
+                    </x-jet-nav-link>                                                          
+
                     <x-jet-nav-link href="{{ route('rooms.index') }}" :active="request()->routeIs('rooms.index')">
                         {{ __('Halaqah') }}
                     </x-jet-nav-link>
@@ -23,14 +27,10 @@
                     <x-jet-nav-link href="{{ route('rooms.create') }}" :active="request()->routeIs('rooms.create')">
                         {{ __('Create Halaqah') }}
                     </x-jet-nav-link>
-                                        
-                    <x-jet-nav-link href="{{ route('feeds') }}" :active="request()->routeIs('feeds')">
-                        {{ __('Feeds') }}
-                    </x-jet-nav-link>                    
                     
-                    <x-jet-nav-link href="{{ route('posts.index') }}" :active="request()->routeIs('posts.index')">
-                        {{ __('My Posts') }}
-                    </x-jet-nav-link>
+                    <x-jet-nav-link :href="route('profile', ['username' => Auth::user()->username ])" :active="request()->routeIs('profile')">
+                        {{ __('My Profile') }}
+                    </x-jet-nav-link> 
                     
                     @can('viewAny', auth()->user())
                     <x-jet-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.create')">
@@ -119,7 +119,7 @@
                             </div>
 
                             <x-jet-dropdown-link href="{{ route('profile.show') }}">
-                                {{ __('Profile') }}
+                                {{ __('Settings Account') }}
                             </x-jet-dropdown-link>
 
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
@@ -163,6 +163,10 @@
             <x-jet-responsive-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">
                 {{ __('Home') }}
             </x-jet-responsive-nav-link>
+
+            <x-jet-responsive-nav-link href="{{ route('feeds') }}" :active="request()->routeIs('feeds')">
+                {{ __('Feeds') }}
+            </x-jet-responsive-nav-link> 
             
             <x-jet-responsive-nav-link href="{{ route('rooms.index') }}" :active="request()->routeIs('rooms.index')">
                 {{ __('Halaqah') }}
@@ -171,14 +175,13 @@
             <x-jet-responsive-nav-link href="{{ route('rooms.create') }}" :active="request()->routeIs('rooms.create')">
                 {{ __('Create Halaqah') }}
             </x-jet-responsive-nav-link>
-            
-            <x-jet-responsive-nav-link href="{{ route('feeds') }}" :active="request()->routeIs('feeds')">
-                {{ __('Feeds') }}
-            </x-jet-responsive-nav-link> 
-            
-            <x-jet-responsive-nav-link href="{{ route('posts.index') }}">
-                {{ __('My Posts') }}
+
+            @auth
+            <x-jet-responsive-nav-link href="{{ route('profile', ['username' => Auth::user()->username ]) }}" :active="request()->routeIs('profile')">
+                {{ __('My Profile') }}
             </x-jet-responsive-nav-link>
+            @endauth
+            
             
             @can('viewAny', auth()->user())
             <x-jet-responsive-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.create')">
@@ -205,7 +208,7 @@
             <div class="mt-3 space-y-1">
                 <!-- Account Management -->
                 <x-jet-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
-                    {{ __('Profile') }}
+                    {{ __('Settings Account') }}
                 </x-jet-responsive-nav-link>
 
                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
