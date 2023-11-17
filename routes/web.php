@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ChatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,8 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
         return view('home');
     })->name('home');
 
+    //Route::get('/chat', "App\Http\Controllers\ChatController@index")->names('chat');
+    Route::resource('/chats', "App\Http\Controllers\ChatController")->names('chats');
     Route::get('/rooms/{roomId}/{classroomName}', "App\Http\Controllers\RoomController@rooms");
     Route::resource('/rooms', "App\Http\Controllers\RoomController")->names('rooms');
     Route::resource('/posts', "App\Http\Controllers\PostController")->names('posts');

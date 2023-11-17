@@ -20,6 +20,10 @@
                         {{ __('Feeds') }}
                     </x-jet-nav-link>                                                          
 
+                    <x-jet-nav-link href="{{ route('chats.index') }}" :active="request()->routeIs('chats.index')">
+                        {{ __('Chat') }}
+                    </x-jet-nav-link>                                                          
+
                     <x-jet-nav-link href="{{ route('rooms.index') }}" :active="request()->routeIs('rooms.index')">
                         {{ __('Halaqah') }}
                     </x-jet-nav-link>
