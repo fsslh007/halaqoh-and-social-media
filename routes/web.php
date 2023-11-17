@@ -14,22 +14,23 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect(route('feeds'));
+    return redirect(route('home'));
 });
 
 // Temporary fix for unknown bug.
 Route::get('/favicon.ico', function () {
-    return redirect(route('feeds'));
+    return redirect(route('home'));
 });
 
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
-    Route::get('/feeds', function () {
-        return view('feeds');
-    })->name('feeds');
+    Route::get('/home', function () {
+        return view('home');
+    })->name('home');
 
     Route::get('/rooms/{roomId}/{classroomName}', "App\Http\Controllers\RoomController@rooms");
     Route::resource('/rooms', "App\Http\Controllers\RoomController")->names('rooms');
     Route::resource('/posts', "App\Http\Controllers\PostController")->names('posts');
+    Route::get('/feeds', "App\Http\Controllers\PostController@followers")->name('feeds');
     Route::resource('/manage/users', "App\Http\Controllers\UserController")->except(['show', 'store'])->names('users');
     Route::get('/{username}', "App\Http\Controllers\ProfileController@show")->name('profile');
 });
