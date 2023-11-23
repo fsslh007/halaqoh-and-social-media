@@ -23,10 +23,6 @@
                     <x-jet-nav-link href="{{ route('rooms.index') }}" :active="request()->routeIs('rooms.index')">
                         {{ __('Halaqah') }}
                     </x-jet-nav-link>
-
-                    <x-jet-nav-link href="{{ route('rooms.create') }}" :active="request()->routeIs('rooms.create')">
-                        {{ __('Create Halaqah') }}
-                    </x-jet-nav-link>
                     
                     <x-jet-nav-link :href="route('profile', ['username' => Auth::user()->username ])" :active="request()->routeIs('profile')">
                         {{ __('My Profile') }}
@@ -170,10 +166,6 @@
             
             <x-jet-responsive-nav-link href="{{ route('rooms.index') }}" :active="request()->routeIs('rooms.index')">
                 {{ __('Halaqah') }}
-            </x-jet-responsive-nav-link>
-            
-            <x-jet-responsive-nav-link href="{{ route('rooms.create') }}" :active="request()->routeIs('rooms.create')">
-                {{ __('Create Halaqah') }}
             </x-jet-responsive-nav-link>
 
             @auth
