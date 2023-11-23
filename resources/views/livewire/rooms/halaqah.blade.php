@@ -17,9 +17,9 @@
 
     <!-- Section for displaying the user's created Halaqah -->
     <div>
-    <div class="mt-8 flex justify-center">
-    <h1 class="w-96 py-4 bg-white shadow-md rounded-lg text-center font-bold" style="padding-left: 150px; padding-right: 150px; font-size: 1.5rem;">MY HALAQAH</h1>
-</div>
+        <div class="mt-8 flex justify-center">
+            <h1 class="w-96 py-4 bg-white shadow-md rounded-lg text-center font-bold" style="padding-left: 150px; padding-right: 150px; font-size: 1.5rem;">MY HALAQAH</h1>
+        </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full">
             @foreach ($rooms as $room)
