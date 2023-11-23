@@ -12,12 +12,15 @@ class Halaqah extends Component
     public $name;
     public $description;
     public $privacy; // Add this property to capture the privacy choice
+    public $currentUserId; // Define a property to hold the user's ID
     public $isOpenCreateHalaqahModal = false;
+    
 
     public function mount()
     {
         $this->rooms = Room::all();
         $this->submittedData = session('submittedData', []);
+        $this->currentUserId = Auth::id(); // Get the authenticated user's ID
     }
 
     public function render()
