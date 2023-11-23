@@ -21,35 +21,15 @@
                 @error('description') <span class="text-red-500">{{ $message }}</span> @enderror
             </div>
 
-            <!-- Meeting Time -->
+            <!-- Privacy Field -->
             <div class="mb-4">
-                <x-jet-label for="meetingTime" value="{{ __('Meeting Time') }}" />
-                <input
-                    id="meetingTime"
-                    type="text"
-                    wire:model.lazy="meetingTime"
-                    class="mt-1 p-2 border rounded-md w-full"
-                    x-data
-                    x-init="flatpickr($refs.input, { enableTime: true, dateFormat: 'Y-m-d H:i', minDate: 'today' })"
-                    x-ref="input"
-                />
-                @error('meetingTime') <span class="text-red-500">{{ $message }}</span> @enderror
+                <x-jet-label for="privacy" value="{{ __('Privacy') }}" />
+                <select id="privacy" wire:model.lazy="privacy" class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow">
+                    <option value="public">Public</option>
+                    <option value="private">Private</option>
+                </select>
+                @error('privacy') <span class="text-red-500">{{ $message }}</span> @enderror
             </div>
-
-            <!-- url Field -->
-            <div class="mb-4">
-                <label for="leavingUrl" class="block text-sm font-medium text-gray-700">Leaving URL:</label>
-                <input type="text" id="leavingUrl" name="leavingUrl" wire:model="leavingUrl" class="mt-1 p-2 border rounded-md w-full">
-                @error('leavingUrl') <span class="text-red-500">{{ $message }}</span> @enderror
-            </div>
-
-            <!-- Password Field -->
-            <div class="mb-4">
-                <x-jet-label for="password" value="{{ __('Password') }}" />
-                <x-jet-input id="password" class="block mt-1 mb-2 w-full" type="password" wire:model.lazy="password" />
-                @error('password') <span class="text-red-500">{{ $message }}</span> @enderror
-            </div>
-
 
             <!-- Add more form fields as needed -->
 

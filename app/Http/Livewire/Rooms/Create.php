@@ -12,23 +12,26 @@ class Create extends Component
 {
 
     public $name;
-    public $meetingTime;
-    public $password;
     public $description;
-    public $leavingUrl; // New field for the leaving URL
+    public $privacy; // Add this property to capture the privacy choice
+    public $isOpenCreateHalaqahModal = false;
 
     // Define the validation rules directly within the component
     protected $rules = [
         'name' => 'required|max:255',
-        'meetingTime' => 'required|date',
-        'password' => 'required|min:6',
         'description' => 'required|max:1000',
-        'leavingUrl' => 'nullable|url', // Validation rule for leaving URL
+        'privacy' => 'required|in:public,private', // Validation rule for privacy
     ];
 
     public function render()
     {
         return view('livewire.rooms.create');
+    }
+
+    public function showCreateHalaqahModal()
+    {
+        $this->isOpenCreateHalaqahModal = true;
+        //dd('Modal opened'); // Add this for debug
     }
 
     public function createRoom()
@@ -39,10 +42,8 @@ class Create extends Component
     Room::create([
         'name' => $this->name,
         'user_id' => Auth::id(),
-        'meeting_time' => $this->meetingTime,
-        'password' => bcrypt($this->password), // Make sure to hash passwords
         'description' => $this->description,
-        'leaving_url' => $this->leavingUrl,
+        'privacy' => $this->privacy, // Save privacy choice
         // Add other fields as needed
     ]);
 
@@ -51,10 +52,8 @@ class Create extends Component
         // Store the submitted data in the session
         session(['submittedData' => [
             'name' => $this->name,
-            'meetingTime' => $this->meetingTime,
-            'password' => $this->password,
             'description' => $this->description,
-            'leavingUrl' => $this->leavingUrl,
+            'privacy' => $this->privacy, // Store privacy in session data
             // Add other fields as needed
         ]]);
 
