@@ -1,5 +1,24 @@
-<div class="flex items-center justify-center h-screen">
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+<div class="flex items-center justify-center h-screen flex-col">
+
+    <!-- Some Free Space from Top -->
+    <div class="mt-4"></div>
+
+    <div class="flex items-center justify-center h-screen bg-green-200">
+        <!-- Create Halaqah Button at the Top with Modified Width -->
+        <div class="flex-grow ml-4 w-60 mb-8">
+            <button id="create_halaqah" wire:click="showCreateHalaqahModal" class="w-full bg-black text-white px-4 py-2 rounded-full focus:outline-none relative z-10" style="position: relative; z-index: 10; background-color: rgba(0, 0, 0, 0.7);">
+                {{ __('+ Create Halaqah') }}
+                <div class="absolute top-0 left-0 h-full w-full bg-black opacity-75 z-0 rounded-full"></div>
+            </button>
+        </div>
+    </div>
+
+
+
+    @include('rooms.create-halaqah-modal')
+
+    <!-- Other Content Below the Button -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full">
         @foreach ($rooms as $room)
             <div class="p-4 flex-shrink-0">
                 <div class="bg-white shadow-md overflow-hidden rounded-lg h-full flex flex-col items-center justify-center">
