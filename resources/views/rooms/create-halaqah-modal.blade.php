@@ -21,8 +21,9 @@
 
             <!-- Privacy Field -->
             <div class="mb-4">
-                <x-jet-label for="privacy" value="{{ __('Privacy') }}" />
-                <select id="privacy" wire:model.lazy="privacy" class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow">
+                <x-jet-label for="ssprivacy" value="{{ __('Privacy') }}" />
+                <select id="ssprivacy" wire:model.lazy="privacy" class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow">
+                    <option value="" disabled selected>Selected Privacy ------</option>
                     <option value="public">Public</option>
                     <option value="private">Private</option>
                 </select>

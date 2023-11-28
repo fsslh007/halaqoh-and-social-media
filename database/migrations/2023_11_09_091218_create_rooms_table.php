@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('meeting_time')->nullable();
             $table->string('password')->nullable();
             $table->text('description')->nullable();
+            $table->enum('privacy', ['public', 'private'])->default('public'); // Add the 'privacy' field
             $table->string('leaving_url')->nullable();
             $table->timestamps();
         });

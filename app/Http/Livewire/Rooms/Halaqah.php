@@ -11,7 +11,7 @@ class Halaqah extends Component
     public $rooms;
     public $name;
     public $description;
-    public $privacy; // Add this property to capture the privacy choice
+    public $privacy = ''; // Initialize privacy as an empty string
     public $currentUserId; // Define a property to hold the user's ID
     public $isOpenCreateHalaqahModal = false;
     

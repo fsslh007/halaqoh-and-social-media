@@ -19,6 +19,7 @@ class Room extends Model
         'password',
         'description',
         'leaving_url',
+        'privacy',
         // Add other fields as needed
     ];
 
