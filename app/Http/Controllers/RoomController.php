@@ -47,8 +47,14 @@ class RoomController extends Controller
         $classroom = Room::findOrFail($id);
         $classroomName = $classroom->name;
     
-        return view('rooms.halaqahroom', compact('id', 'classroomName'));
+        return view('rooms.halaqahroom', [
+            'id' => $id,
+            'classroomName' => $classroomName,
+            'room' => $classroom, // Pass the $room variable here
+        ]);
     }
+    
+
 
     /**
      * Store a newly created resource in storage.
@@ -80,8 +86,9 @@ class RoomController extends Controller
      */
     public function edit(Room $room)
     {
-        //
+        return view('rooms.edit-halaqahroom', compact('room'));
     }
+    
 
     /**
      * Update the specified resource in storage.
