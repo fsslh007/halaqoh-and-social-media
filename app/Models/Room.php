@@ -15,10 +15,7 @@ class Room extends Model
     protected $fillable = [
         'name',
         'user_id',
-        'meeting_time',
-        'password',
         'description',
-        'leaving_url',
         'privacy',
         // Add other fields as needed
     ];
