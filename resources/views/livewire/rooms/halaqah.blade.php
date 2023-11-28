@@ -22,7 +22,7 @@
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full">
-            @foreach ($rooms->where('privacy', 'private' && 'public') as $room)
+            @foreach ($rooms as $room)
                 @if ($room->user_id === $currentUserId)
                     <div class="p-4 flex-shrink-0">
                         <div class="bg-white shadow-md overflow-hidden rounded-lg h-full flex flex-col items-center justify-center">
@@ -33,7 +33,7 @@
                                 <p><strong>Description:</strong> {{ wordwrap($room->description, 45, "\n", true) }}</p>
                             </div>
                             <div class="text-center mb-4 whitespace-pre-line">
-                                <p><strong>Privacy:</strong> {{ wordwrap($room->privacy, 45, "\n", true) }}</p>
+                                <p><strong>Meeting Time:</strong> {{ wordwrap($room->meeting_time, 45, "\n", true) }}</p>
                             </div>
 
                             <!-- Show owner created Halaqah -->
@@ -72,7 +72,7 @@
             <h1 class="w-96 py-4 bg-white shadow-md rounded-lg text-center font-bold" style="padding-left: 150px; padding-right: 150px; font-size: 1.5rem;">ALL HALAQAH</h1>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full">
-            @foreach ($rooms->where('privacy', 'public') as $room)
+            @foreach ($rooms as $room)
                 <div class="p-4 flex-shrink-0">
                     <div class="bg-white shadow-md overflow-hidden rounded-lg h-full flex flex-col items-center justify-center">
                         <div class="text-center mb-4 whitespace-pre-line">
@@ -82,7 +82,7 @@
                             <p><strong>Description:</strong> {{ wordwrap($room->description, 45, "\n", true) }}</p>
                         </div>
                         <div class="text-center mb-4 whitespace-pre-line">
-                                <p><strong>Privacy:</strong> {{ wordwrap($room->privacy, 45, "\n", true) }}</p>
+                            <p><strong>Meeting Time:</strong> {{ wordwrap($room->meeting_time, 45, "\n", true) }}</p>
                         </div>
 
                         <!-- Show owner created Halaqah -->
