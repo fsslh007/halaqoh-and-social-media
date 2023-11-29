@@ -88,6 +88,17 @@ class RoomController extends Controller
     {
         return view('rooms.edit-halaqahroom', compact('room'));
     }
+
+    /**
+     * Show the form for inviting the specified resource.
+     *
+     * @param  \App\Models\Room  $room
+     * @return \Illuminate\Http\Response
+     */
+    public function member(Room $room)
+    {
+        return view('rooms.member-halaqahroom', compact('room'));
+    }
     
 
     /**

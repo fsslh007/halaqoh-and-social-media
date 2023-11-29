@@ -4,11 +4,16 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Halaqah Room - ' . $classroomName) }}
             </h2>
-            @can('update', $room)
-            <a href="{{ route('rooms.edit', ['room' => $id]) }}" :active="request()->routeIs('rooms.edit', ['room' => $id])')" class="text-sm text-gray-600 hover:text-gray-900 focus:outline-none">
-                Settings
-            </a>
-            @endcan
+            <div class="flex items-center space-x-4">
+                @can('update', $room)
+                <a href="{{ route('rooms.member', ['room' => $id]) }}" :active="request()->routeIs('rooms.member', ['room' => $id])')" class="text-sm text-gray-600 hover:text-gray-900 focus:outline-none">
+                    Member
+                </a>
+                <a href="{{ route('rooms.edit', ['room' => $id]) }}" :active="request()->routeIs('rooms.edit', ['room' => $id])')" class="text-sm text-gray-600 hover:text-gray-900 focus:outline-none ml-4">
+                    Settings
+                </a>
+                @endcan
+            </div>
         </div>
     </x-slot>
 
