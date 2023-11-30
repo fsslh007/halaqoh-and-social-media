@@ -99,7 +99,7 @@ class RoomController extends Controller
     {
         return view('rooms.member-halaqahroom', [
             'roomId' => $room->id,
-            'classroomName' => $room->classroomName, // Replace 'classroomName' with the actual property name from your Room model
+            'classroomName' => $room->name, // Replace 'classroomName' with the actual property name from your Room model
         ]);
     }
     
