@@ -105,6 +105,21 @@ class RoomController extends Controller
     
 
     /**
+     * Show the form for inviting the specified resource.
+     *
+     * @param  \App\Models\Room  $room
+     * @return \Illuminate\Http\Response
+     */
+    public function join(Room $room)
+    {
+        return view('rooms.join-halaqahroom', [
+            'roomId' => $room->id,
+            'classroomName' => $room->name, // Replace 'classroomName' with the actual property name from your Room model
+        ]);
+    }
+    
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateRoomRequest  $request
