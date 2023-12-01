@@ -29,4 +29,9 @@ class Room extends Model
     {
         return $this->hasMany(UploadFile::class);
     }
+
+    public function members()
+    {
+        return $this->hasMany(Member::class);
+    }
 }

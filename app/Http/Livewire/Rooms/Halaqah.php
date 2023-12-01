@@ -72,7 +72,7 @@ class Halaqah extends Component
         return redirect('/rooms'); // Change 'your_redirect_route' to the actual route
     }
 
-    public function joinHalaqah($roomId, $classroomName)
+    public function seeHalaqah($roomId, $classroomName)
     {
         // Implement any logic or validations needed
     
