@@ -30,7 +30,6 @@ class JoinHalaqahroom extends Component
             Member::create([
                 'user_id' => auth()->id(),
                 'room_id' => $this->roomId,
-                'username' => auth()->user()->username,
             ]);
     
             session()->flash('message', 'You have accepted the invitation.');
