@@ -112,6 +112,8 @@ class RoomController extends Controller
      */
     public function join(Room $room)
     {
+        $classroomName = $room->name; // Get the classroom name
+        
         return view('rooms.join-halaqahroom', [
             'roomId' => $room->id,
             'classroomName' => $room->name, // Replace 'classroomName' with the actual property name from your Room model
