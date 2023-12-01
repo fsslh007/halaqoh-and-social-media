@@ -18,18 +18,28 @@ class JoinHalaqahroom extends Component
 
     public function acceptInvitation()
     {
-        // Store acceptance in the members table
-        Member::create([
-            'user_id' => auth()->id(), // Assuming authenticated user ID
-            'room_id' => $this->roomId,
-            'username' => auth()->user()->username, // Assuming the username is in the users table
-        ]);
+        // Check if the user is already a member of this room
+        $existingMembership = Member::where('user_id', auth()->id())
+                                    ->where('room_id', $this->roomId)
+                                    ->first();
     
-        session()->flash('message', 'You have accepted the invitation.');
+        if ($existingMembership) {
+            session()->flash('message', "You have already joined this Halaqah: {$this->classroomName}");
+        } else {
+            // Store acceptance in the members table
+            Member::create([
+                'user_id' => auth()->id(),
+                'room_id' => $this->roomId,
+                'username' => auth()->user()->username,
+            ]);
     
-        // Refresh the component to display the message
-        $this->emitSelf('invitationAccepted');
+            session()->flash('message', 'You have accepted the invitation.');
+    
+            // Refresh the component to display the message
+            $this->emitSelf('invitationAccepted');
+        }
     }
+    
        
 
     public function render()
