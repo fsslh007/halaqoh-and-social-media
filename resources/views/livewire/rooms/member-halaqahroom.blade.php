@@ -33,7 +33,20 @@
                 @foreach ($members as $index => $member)
                     <tr>
                         <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 font-medium text-gray-900">{{ $index + 1 }}</td>
-                        <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">{{ $member->user->username }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <a href="{{ route('profile', ['username' => $member->user->username]) }}">
+                                <div class="flex items-center">
+                                <div class="flex-shrink-0 h-10 w-10">
+                                    <img class="h-10 w-10 rounded-full" src="{{ $member->user->profile_photo_url }}" alt="">
+                                </div>
+                                <div class="ml-4">
+                                    <div class="text-sm font-medium text-gray-900">
+                                    {{ $member->user->username }}
+                                    </div>
+                                </div>
+                                </div>
+                            </a>
+                        </td>
                         <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">{{ $member->role }}</td>
                     </tr>
                 @endforeach
