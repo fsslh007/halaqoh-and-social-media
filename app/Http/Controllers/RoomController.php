@@ -86,7 +86,10 @@ class RoomController extends Controller
      */
     public function edit(Room $room)
     {
-        return view('rooms.edit-halaqahroom', compact('room'));
+        return view('rooms.edit-halaqahroom', [
+            'roomId' => $room->id, // Pass the $roomId variable to the view
+            'room' => $room, // Pass the $room variable as needed
+        ]);
     }
 
     /**
