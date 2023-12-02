@@ -14,9 +14,6 @@ class Halaqahroom extends Component
     public $roomId;
     public $classroomName;
     public $room;
-    public $editRoomId;
-    public $isOpenDeleteRoomModal = false;
-    public $isOpenEditRoomModal = false;
     public $file;
     public $uploadedFiles; // Variable name corrected
 
@@ -28,8 +25,7 @@ class Halaqahroom extends Component
                 'name' => '',
                 'meeting_time' => '',
                 'description' => '',
-                'leaving_url' => '',
-                'password' => '',
+                'meeting_url' => '',
                 // Additional properties as needed
             ],
         ];
@@ -37,11 +33,6 @@ class Halaqahroom extends Component
 
     // Validation rules
     protected $rules = [
-        'room.name' => 'required',
-        'room.meeting_time' => 'required',
-        'room.description' => 'required',
-        'room.leaving_url' => 'required',
-        'room.password' => 'required',
         'file' => 'nullable|file|max:10240',
         // Additional validation rules as needed
     ];
@@ -59,67 +50,6 @@ class Halaqahroom extends Component
     public function render()
     {
         return view('livewire.rooms.halaqahroom');
-    }
-
-    // Show edit room modal
-    public function showEditRoomModal($roomId)
-    {
-        $this->isOpenEditRoomModal = true;
-    }
-
-    // Update room information
-    public function updateRoom()
-    {
-        // Validate the updated room fields
-        $this->validate([
-            'room.name' => 'required',
-            'room.meeting_time' => 'required',
-            'room.description' => 'required',
-            'room.leaving_url' => 'required',
-            'room.password' => 'required',
-            // Additional validation rules as needed
-        ]);
-
-        // Update the room
-        $this->room->save();
-
-        // Handle file upload
-        $this->uploadFile();
-
-        // Flash a success message
-        session()->flash('success', 'Classroom updated successfully');
-
-        // Close the modal
-        $this->isOpenEditRoomModal = false;
-
-        // Refresh the Livewire component
-        $this->emit('refreshLivewireComponent');
-    }
-
-    // Show delete room modal
-    public function showDeleteRoomModal($roomId)
-    {
-        $this->isOpenDeleteRoomModal = true;
-    }
-
-    // Delete room
-    public function deleteRoom()
-    {
-        // Find the room to delete
-        $room = Room::findOrFail($this->roomId);
-
-        // Your delete logic here...
-
-        try {
-            $room->delete();
-            session()->flash('success', 'Classroom deleted successfully');
-        } catch (Exception $e) {
-            session()->flash('error', 'Cannot delete classroom');
-        }
-
-        // Redirect to the "/rooms" page using a named route
-        return redirect()->route('rooms.index');
-        $this->isOpenDeleteRoomModal = false;
     }
 
     // Upload file
