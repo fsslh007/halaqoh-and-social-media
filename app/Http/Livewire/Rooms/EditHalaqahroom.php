@@ -9,6 +9,7 @@ class EditHalaqahroom extends Component
 {
     public $state;
     public $roomId;
+    public $isOpenDeleteRoomModal = false;
 
     protected $rules = [
         'state.name' => 'required|string|max:255',
@@ -39,9 +40,29 @@ class EditHalaqahroom extends Component
         $this->emit('saved');
     }
 
-    public function updated()
+    // Show delete room modal
+    public function confirmDelete($roomId)
     {
-    $this->emit('notifySaved');
+        $this->roomId = $roomId;
+        $this->isOpenDeleteRoomModal = true;
+    }
+
+    public function deleteRoom()
+    {
+        $room = Room::findOrFail($this->roomId);
+
+        try {
+            $room->delete();
+            session()->flash('success', 'Halaqah deleted successfully');
+            $this->isOpenDeleteRoomModal = false;
+            $this->emit('notifyDeleted');
+        } catch (\Exception $e) {
+            session()->flash('error', 'Cannot delete Halaqah');
+        }
+
+        // Redirect to the "/rooms" page using a named route
+        return redirect()->route('rooms.index');
+        $this->isOpenDeleteRoomModal = false;
     }
 
     public function render()

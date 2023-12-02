@@ -3,11 +3,11 @@
 <div>
     <x-jet-dialog-modal wire:model="isOpenDeleteRoomModal">
         <x-slot name="title">
-            {{ __('Delete Classroom') }}
+            {{ __('Delete Halaqah') }}
         </x-slot>
 
         <x-slot name="content">
-            {{ __('Are you sure you want to delete this classroom?') }}
+            {{ __('Are you sure you want to delete this Halaqah?') }}
         </x-slot>
 
         <x-slot name="footer">
