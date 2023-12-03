@@ -6,6 +6,7 @@ use App\Models\Comment;
 use App\Models\Like;
 use App\Models\Post;
 use App\Models\Media;
+use App\Models\User;
 use Auth;
 use Exception;
 use Illuminate\Support\Facades\Gate;
@@ -251,6 +252,18 @@ class View extends Component
                 $query->select(['id', 'name', 'username', 'profile_photo_path']);
             },
             ])->latest()->paginate(10);
+        } else if (! empty($this->queryType) && $this->queryType === 'profile') {
+            // Fetch posts for the specific user based on the username
+            $username = request()->route()->parameter('username');
+    
+            $user = User::where('username', $username)->firstOrFail();
+    
+            $posts = Post::withCount(['likes', 'comments'])
+                ->where('user_id', $user->id)
+                ->with(['userLikes', 'postImages', 'user' => function ($query) {
+                    $query->select(['id', 'name', 'username', 'profile_photo_path']);
+                },
+                ])->latest()->paginate(10);   
         } else {
             $posts = Post::withCount(['likes', 'comments'])->with(['userLikes', 'postImages', 'user' => function ($query) {
                 $query->select(['id', 'name', 'username', 'profile_photo_path']);

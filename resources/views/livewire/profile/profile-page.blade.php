@@ -64,6 +64,6 @@
 		</div>
 	</div>
 
-	<livewire:posts.view :type="'me'" />
+	<livewire:posts.view :type="'profile'" />
 	
 </div>
