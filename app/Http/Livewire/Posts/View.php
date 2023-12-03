@@ -244,14 +244,14 @@ class View extends Component
             $posts = Post::withCount(['likes', 'comments'])->where('user_id', Auth::id())->with(['userLikes', 'postImages', 'user' => function ($query) {
                 $query->select(['id', 'name', 'username', 'profile_photo_path']);
             },
-            ])->latest()->paginate(10);
+            ])->latest()->get();
         } elseif (! empty($this->queryType) && $this->queryType === 'followers') {
             $userIds = Auth::user()->followings()->pluck('follower_id');
             $userIds[] = Auth::id();
             $posts = Post::withCount(['likes', 'comments'])->whereIn('user_id', $userIds)->with(['userLikes', 'postImages', 'user' => function ($query) {
                 $query->select(['id', 'name', 'username', 'profile_photo_path']);
             },
-            ])->latest()->paginate(10);
+            ])->latest()->get();
         } else if (! empty($this->queryType) && $this->queryType === 'profile') {
             // Fetch posts for the specific user based on the username
             $username = request()->route()->parameter('username');
@@ -263,12 +263,12 @@ class View extends Component
                 ->with(['userLikes', 'postImages', 'user' => function ($query) {
                     $query->select(['id', 'name', 'username', 'profile_photo_path']);
                 },
-                ])->latest()->paginate(10);   
+                ])->latest()->get();   
         } else {
             $posts = Post::withCount(['likes', 'comments'])->with(['userLikes', 'postImages', 'user' => function ($query) {
                 $query->select(['id', 'name', 'username', 'profile_photo_path']);
             },
-            ])->latest()->paginate(10);
+            ])->latest()->get();
         }
 
         return $posts;

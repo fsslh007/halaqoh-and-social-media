@@ -72,9 +72,7 @@
     </div>
     @endforelse
 
-    <div class="py-4 mb-2">
-        {{ $posts->links() }}
-    </div>
+
 
     @include('elements.comments-post-modal')
     @include('elements.delete-post-modal')
