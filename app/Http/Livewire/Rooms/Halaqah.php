@@ -26,8 +26,20 @@ class Halaqah extends Component
 
     public function render()
     {
-        return view('livewire.rooms.halaqah');
+        // Fetch rooms created by the current user
+        $ownerRooms = Room::where('user_id', $this->currentUserId)->get();
+    
+        // Fetch rooms joined by the current user excluding their own rooms
+        $joinedRooms = Room::whereHas('members', function ($query) {
+            $query->where('user_id', $this->currentUserId);
+        })->where('user_id', '!=', $this->currentUserId)->get();
+    
+        return view('livewire.rooms.halaqah', [
+            'createdRooms' => $ownerRooms,
+            'joinedRooms' => $joinedRooms,
+        ]);
     }
+    
 
     public function showCreateHalaqahModal()
     {
