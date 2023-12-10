@@ -18,5 +18,12 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleSeeder::class);
         
         User::factory()->create(['email' => 'admin@gmail.com', 'email_verified_at' => null, 'role_id' => 2]);
+        User::factory()->create(['email' => 'user@gmail.com', 'email_verified_at' => null, 'role_id' => 1]);
+
+        $this->call(RoleSeeder::class);
+        $this->call(DummyDataSeeder::class);
+        $this->call(RoomSeeder::class);
+        $this->call(MemberSeeder::class);
+
     }
 }
