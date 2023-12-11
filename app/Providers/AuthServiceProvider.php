@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Room;
+use App\Policies\RoomPolicy;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
@@ -21,6 +23,7 @@ class AuthServiceProvider extends ServiceProvider
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
         Post::class => PostPolicy::class,
         Comment::class => CommentPolicy::class,
+        Room::class => RoomPolicy::class,
         'App\Models\User' => 'App\Policies\UserPolicy',
     ];
 

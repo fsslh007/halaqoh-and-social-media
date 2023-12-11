@@ -19,7 +19,7 @@ class RoomPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        //;
     }
 
     /**
@@ -31,7 +31,32 @@ class RoomPolicy
      */
     public function view(User $user, Room $room)
     {
-        //
+        // Check if the user owns the room or is a member associated with the room
+        $isRoomOwner = $user->id === $room->user_id;
+        $isRoomMember = $room->members()->where('user_id', $user->id)->exists();
+
+        if ($isRoomOwner || $isRoomMember) {
+            return Response::allow();
+        }
+        return Response::deny('You do not have permission to view this Halaqah room.');
+    }
+
+    /**
+     * Determine whether the owner can view the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Room  $room
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function Ownerview(User $user, Room $room)
+    {
+        // Check if the user owns the room or is a member associated with the room
+        $isRoomOwner = $user->id === $room->user_id;
+
+        if ($isRoomOwner) {
+            return Response::allow();
+        }
+        return Response::deny('You do not have permission to view this page.');
     }
 
     /**

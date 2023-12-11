@@ -43,16 +43,22 @@ class RoomController extends Controller
      */
     public function rooms($id, $name): View
     {
-        // Example logic to retrieve the classroom name based on the ID
-        $classroom = Room::findOrFail($id);
-        $classroomName = $classroom->name;
+        // Fetch the room by ID (assuming 'Room' model exists)
+        $room = Room::findOrFail($id);
+    
+        // Check if the user can view the room using the RoomPolicy
+        $this->authorize('view', $room);
+        
+        // Proceed only if authorization passes
+        $classroomName = $room->name;
     
         return view('rooms.halaqahroom', [
             'id' => $id,
             'classroomName' => $classroomName,
-            'room' => $classroom, // Pass the $room variable here
+            'room' => $room,
         ]);
     }
+    
     
 
 
@@ -86,6 +92,9 @@ class RoomController extends Controller
      */
     public function edit(Room $room)
     {
+        // Check if the user can view the room using the RoomPolicy
+        $this->authorize('Ownerview', $room);
+
         return view('rooms.edit-halaqahroom', [
             'roomId' => $room->id, // Pass the $roomId variable to the view
             'room' => $room, // Pass the $room variable as needed
@@ -100,6 +109,9 @@ class RoomController extends Controller
      */
     public function member(Room $room)
     {
+        // Check if the user can view the room using the RoomPolicy
+        $this->authorize('Ownerview', $room);
+
         return view('rooms.member-halaqahroom', [
             'roomId' => $room->id,
             'classroomName' => $room->name, // Replace 'classroomName' with the actual property name from your Room model
