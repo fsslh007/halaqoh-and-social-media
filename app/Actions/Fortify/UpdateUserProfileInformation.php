@@ -21,9 +21,14 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
     {
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
+            'surname' => ['required', 'string', 'max:255'], // Add validation for the surname field
             'username' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($user->id)],
             'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
-            'is_private' => ['required', 'in:0,1'],
+            'day' => ['nullable', 'numeric'], // Make these fields nullable
+            'month' => ['nullable', 'numeric'],
+            'year' => ['nullable', 'numeric'],
+            'gender' => ['nullable', 'in:male,female'], // Make gender field nullable
+            // 'is_private' => ['required', 'in:0,1'],
             'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:1024'],
         ])->validateWithBag('updateProfileInformation');
 
@@ -37,10 +42,16 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
         } else {
             $user->forceFill([
                 'name' => $input['name'],
+                'surname' => $input['surname'], // Include the surname field
                 'username' => $input['username'],
-                'is_private' => $input['is_private'],
                 'email' => $input['email'],
+                // 'is_private' => $input['is_private'],
+                'date_of_birth' => isset($input['year']) && isset($input['month']) && isset($input['day'])
+                    ? $input['year'] . '-' . $input['month'] . '-' . $input['day']
+                    : $user->date_of_birth, // Keep the existing date_of_birth if not provided
+                'gender' => $input['gender'] ?? $user->gender, // Keep the existing gender if not provided
             ])->save();
+            
         }
     }
 
@@ -56,11 +67,19 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
     {
         $user->forceFill([
             'name' => $input['name'],
+            'surname' => $input['surname'], // Include the surname field
             'username' => $input['username'],
             'email' => $input['email'],
-            'is_private' => true,
+            // 'is_private' => true,
             'email_verified_at' => null,
+            'date_of_birth' => isset($input['year']) && isset($input['month']) && isset($input['day'])
+                ? $input['year'] . '-' . $input['month'] . '-' . $input['day']
+                : $user->date_of_birth, // Keep the existing date_of_birth if not provided
+            'gender' => $input['gender'] ?? $user->gender, // Keep the existing gender if not provided
         ])->save();
+        
+        $user->sendEmailVerificationNotification();
+        
 
         $user->sendEmailVerificationNotification();
     }

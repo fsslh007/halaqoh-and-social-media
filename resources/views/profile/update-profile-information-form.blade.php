@@ -59,7 +59,7 @@
             <x-jet-input-error for="name" class="mt-2" />
         </div>
         
-        <!-- Profile Visibility -->
+        <!-- Profile Visibility
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="visibility" value="{{ __('Account Visibility') }}" />
             <select id="visibility" class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" wire:model.defer="state.is_private" />
@@ -67,13 +67,67 @@
 				<option value="1"> Private </option>
             </select>
             <x-jet-input-error for="is_private" class="mt-2" />
+        </div> -->
+
+        <!-- Surname -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="surname" value="{{ __('Surname') }}" />
+            <x-jet-input id="surname" type="text" class="mt-1 block w-full" wire:model.defer="state.surname" />
+            <x-jet-input-error for="surname" class="mt-2" />
         </div>
+
 
         <!-- Username -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="username" value="{{ __('Username') }}" />
             <x-jet-input id="username" type="text" class="mt-1 block w-full" wire:model.defer="state.username" />
             <x-jet-input-error for="username" class="mt-2" />
+        </div>
+
+        <!-- Date of Birth -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="dob" value="{{ __('Date of Birth') }}" />
+            <div class="flex items-center">
+                <select id="day" name="day" class="flex-1 mr-2 block mt-1 w-full rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" wire:model.defer="state.day">
+                @for ($i = 1; $i <= 31; $i++)
+                    <option value="{{ $i }}">{{ str_pad($i, 2, '0', STR_PAD_LEFT) }}</option>
+                @endfor
+                </select>
+
+                <select id="month" name="month" class="flex-1 mr-2 block mt-1 w-full rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" wire:model.defer="state.month">
+                @for ($i = 1; $i <= 12; $i++)
+                    <option value="{{ $i }}">{{ str_pad($i, 2, '0', STR_PAD_LEFT) }}</option>
+                @endfor
+                </select>
+
+                <select id="year" name="year" class="flex-1 block mt-1 w-full rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" wire:model.defer="state.year">
+                @for ($i = date('Y'); $i >= 1900; $i--)
+                    <option value="{{ $i }}">{{ $i }}</option>
+                @endfor
+                </select>
+            </div>
+            <x-jet-input-error for="dob" class="mt-2" />
+        </div>
+
+        <!-- Gender -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="gender" value="{{ __('Gender') }}" />
+            <div class="flex items-center mt-2">
+                <!-- Gender options -->
+                <label for="male" class="flex-1 mr-2">
+                    <div class="border rounded-md p-2 flex items-center justify-between cursor-pointer border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        <span>Male</span>
+                        <input type="radio" name="gender" value="male" class="" wire:model="state.gender" />
+                    </div>
+                </label>
+                <label for="female" class="flex-1">
+                    <div class="border rounded-md p-2 flex items-center justify-between cursor-pointer border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        <span>Female</span>
+                        <input type="radio" name="gender" value="female" class="" wire:model="state.gender" />
+                    </div>
+                </label>
+            </div>
+            <x-jet-input-error for="gender" class="mt-2" />
         </div>
         
         <!-- Email -->
