@@ -9,29 +9,75 @@
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
-            <div>
-                <x-jet-label for="name" value="{{ __('Name') }}" />
-                <x-jet-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            </div>
-            
-            <div class="mt-4">
-                <x-jet-label for="username" value="{{ __('Username') }}" />
-                <x-jet-input id="username" class="block mt-1 w-full" type="text" name="username" :value="old('username')" required />
-            </div>
-            
-            <div class="mt-4">
-                <x-jet-label for="email" value="{{ __('Email') }}" />
-                <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div>
+                    <x-jet-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" placeholder="{{ __('First name') }}" />
+                </div>
+                
+                <div>
+                    <x-jet-input id="surname" class="block mt-1 w-full" type="text" name="surname" :value="old('surname')" required placeholder="{{ __('Surname') }}" />
+                </div>
             </div>
 
             <div class="mt-4">
-                <x-jet-label for="password" value="{{ __('Password') }}" />
-                <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
+                <x-jet-input id="username" class="block mt-1 w-full" type="text" name="username" :value="old('username')" required placeholder="{{ __('Username') }}" />
             </div>
 
             <div class="mt-4">
-                <x-jet-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
-                <x-jet-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
+                <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required placeholder="{{ __('Email address') }}" />
+            </div>
+
+            <div class="mt-4">
+                <x-jet-label for="dob" value="{{ __('Date of Birth') }}" />
+                <div class="flex items-center">
+                    <select id="day" name="day" class="flex-1 mr-2 block mt-1 w-full rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        <option value="" selected disabled>DD</option>
+                        @for ($i = 1; $i <= 31; $i++)
+                            <option value="{{ $i }}">{{ str_pad($i, 2, '0', STR_PAD_LEFT) }}</option>
+                        @endfor
+                    </select>
+
+                    <select id="month" name="month" class="flex-1 mr-2 block mt-1 w-full rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        <option value="" selected disabled>MM</option>
+                        @for ($i = 1; $i <= 12; $i++)
+                            <option value="{{ $i }}">{{ str_pad($i, 2, '0', STR_PAD_LEFT) }}</option>
+                        @endfor
+                    </select>
+
+                    <select id="year" name="year" class="flex-1 block mt-1 w-full rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        <option value="" selected disabled>YYYY</option>
+                        @for ($i = date('Y'); $i >= 1900; $i--)
+                            <option value="{{ $i }}">{{ $i }}</option>
+                        @endfor
+                    </select>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <x-jet-label for="gender" value="{{ __('Gender') }}" />
+                <div class="flex items-center mt-2">
+                    <label for="male" class="flex-1 mr-2">
+                        <div class="border rounded-md p-2 flex items-center justify-between cursor-pointer border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            <span>Male</span>
+                            <input type="radio" name="gender" value="male" class="" />
+                        </div>
+                    </label>
+
+                    <label for="female" class="flex-1">
+                        <div class="border rounded-md p-2 flex items-center justify-between cursor-pointer border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            <span>Female</span>
+                            <input type="radio" name="gender" value="female" class="" />
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" placeholder="{{ __('Password') }}" />
+            </div>
+
+            <div class="mt-4">
+                <x-jet-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" placeholder="{{ __('Confirm Password') }}" />
             </div>
 
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())

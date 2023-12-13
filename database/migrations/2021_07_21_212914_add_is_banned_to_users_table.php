@@ -14,7 +14,7 @@ class AddIsBannedToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->boolean('is_banned')->default(0);
+            $table->boolean('is_banned')->default(0)->after('is_private');
         });
     }
 
