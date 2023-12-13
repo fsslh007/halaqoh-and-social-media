@@ -15,12 +15,12 @@ class RoomSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker::create();
+        $faker = Faker::create('en_US');
 
         foreach (range(1, 10) as $index) {
             DB::table('rooms')->insert([
                 'user_id' => $faker->numberBetween(1, 4), // Assuming you have four users created
-                'name' => $faker->words(3, true),
+                'name' => $faker->name,
                 'description' => $faker->paragraph,
                 'privacy' => $faker->randomElement(['public', 'private']),
                 'created_at' => $faker->dateTimeBetween('-1 year', 'now'),
