@@ -1,4 +1,14 @@
-<!-- resources/views/livewire/rooms/halaqahroom.blade.php -->
+@if(session()->has('success'))
+    <div class="bg-green-100 border my-3 border-green-400 text-green-700 dark:bg-green-700 dark:border-green-600 dark:text-green-100 px-4 py-3 rounded relative" role="alert">
+        <span class="block sm:inline text-center">{{ session()->get('success') }}</span>
+    </div>
+    @endif
+
+    @if(session()->has('error'))
+    <div class="bg-red-100 border my-3 border-red-400 text-red-700 dark:bg-red-700 dark:border-red-600 dark:text-red-100 px-4 py-3 rounded relative" role="alert">
+        <span class="block sm:inline text-center">{{ session()->get('error') }}</span>
+    </div>
+@endif
 
 <div class="flex flex-col mx-2 my-5 md:mx-6 md:my-12 lg:my-12 lg:w-2/5 lg:mx-auto">
     <div class="bg-white shadow-md rounded-3xl p-4">

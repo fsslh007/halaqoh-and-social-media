@@ -38,7 +38,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get('/rooms/{room}/{classroomName}/join', "App\Http\Controllers\RoomController@join")->name('rooms.join');
     Route::get('/rooms/{room}/{classroomName}/member', "App\Http\Controllers\RoomController@member")->name('rooms.member');
     Route::get('/rooms/{room}/edit', "App\Http\Controllers\RoomController@edit")->name('rooms.edit');
-    Route::get('/rooms/{roomId}/{classroomName}', "App\Http\Controllers\RoomController@rooms");
+    Route::get('/rooms/{roomId}/{classroomName}', "App\Http\Controllers\RoomController@rooms")->name('rooms.halaqahroom');
     Route::resource('/rooms', "App\Http\Controllers\RoomController")->names('rooms');
     Route::resource('/posts', "App\Http\Controllers\PostController")->names('posts');
     Route::get('/feeds', "App\Http\Controllers\PostController@followers")->name('feeds');

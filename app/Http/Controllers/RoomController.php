@@ -126,6 +126,9 @@ class RoomController extends Controller
      */
     public function createMeet(Room $room)
     {
+        // Fetch the room by ID
+        $rooms = Room::findOrFail($room->id);
+    
         // Check if the user can view the room using the RoomPolicy
         $this->authorize('Ownerview', $room);
 
