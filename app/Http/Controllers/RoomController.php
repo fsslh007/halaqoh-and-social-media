@@ -117,6 +117,23 @@ class RoomController extends Controller
             'classroomName' => $room->name, // Replace 'classroomName' with the actual property name from your Room model
         ]);
     }
+
+    /**
+     * Show the form for create meet the specified resource.
+     *
+     * @param  \App\Models\Room  $room
+     * @return \Illuminate\Http\Response
+     */
+    public function createMeet(Room $room)
+    {
+        // Check if the user can view the room using the RoomPolicy
+        $this->authorize('Ownerview', $room);
+
+        return view('rooms.create-meet', [
+            'roomId' => $room->id,
+            'classroomName' => $room->name, // Replace 'classroomName' with the actual property name from your Room model
+        ]);
+    }
     
 
     /**

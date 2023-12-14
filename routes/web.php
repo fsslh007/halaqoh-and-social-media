@@ -34,6 +34,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
         return view('home'); // You might need a separate view for authenticated home
     })->name('home');
 
+    Route::get('/rooms/{room}/{classroomName}/create meet', "App\Http\Controllers\RoomController@createMeet")->name('rooms.createMeet');
     Route::get('/rooms/{room}/{classroomName}/join', "App\Http\Controllers\RoomController@join")->name('rooms.join');
     Route::get('/rooms/{room}/{classroomName}/member', "App\Http\Controllers\RoomController@member")->name('rooms.member');
     Route::get('/rooms/{room}/edit', "App\Http\Controllers\RoomController@edit")->name('rooms.edit');
