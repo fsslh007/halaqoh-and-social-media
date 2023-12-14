@@ -20,7 +20,10 @@
 
 				<div class="mt-16">
 					<h1 class="text-lg text-center font-semibold">
-					{{ $user->name }} 
+						<span>
+						{{ $user->name }} 
+						{{ $user->surname }} 
+						</span>
 					</h1>
 					<p class="text-sm text-gray-600 text-center">
 					{{ '@' . $user->username }}
