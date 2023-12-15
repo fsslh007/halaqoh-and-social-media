@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Rooms;
 
 use Livewire\Component;
 use App\Models\Room;
+use App\Models\Meet; // Add the Meet model
 use Livewire\WithFileUploads;
 
 class Halaqahroom extends Component
@@ -44,12 +45,14 @@ class Halaqahroom extends Component
         $this->classroomName = $classroomName;
         $this->room = Room::findOrFail($roomId);
         $this->getUploadedFiles(); // Initialize the uploadedFiles variable
+        $meets = $this->getMeets();
     }
 
     // Render method to display the Livewire component
     public function render()
     {
-        return view('livewire.rooms.halaqahroom');
+        $meets = $this->getMeets(); // Fetch meets associated with the room
+        return view('livewire.rooms.halaqahroom', ['meets' => $meets]);
     }
 
     // Upload file
@@ -88,4 +91,13 @@ class Halaqahroom extends Component
     {
         $this->uploadedFiles = $this->room->uploadFiles()->with('user')->get();    
     }
+
+    public function getMeets()
+    {
+        // Fetch meets related to the current room and order them by date in descending order (newest to oldest)
+        return Meet::where('room_id', $this->roomId)
+            ->orderBy('created_at', 'desc')
+            ->get();
+    }
+    
 }

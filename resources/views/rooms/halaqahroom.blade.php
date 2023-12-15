@@ -28,7 +28,7 @@
         </div>
     </x-slot>
 
-    <div class="container px-3 mx-auto grid bg-gray-100">
+    <div class="bg-gray-100">
         <style>
             /* Move these styles to your CSS file for better organization */
             input, textarea, button, select, a { -webkit-tap-highlight-color: rgba(0,0,0,0); }

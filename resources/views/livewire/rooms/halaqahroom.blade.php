@@ -10,7 +10,36 @@
     </div>
 @endif
 
+@foreach ($meets as $meet)
 <div class="flex flex-col mx-2 my-5 md:mx-6 md:my-12 lg:my-12 lg:w-2/5 lg:mx-auto">
+    <div class="bg-white shadow-md">
+        <div style="background-color: orange; display: flex; justify-content: left; align-items: center;">
+            <button wire:click="" class="mb-2" style="font-weight: bold; display: inline-block;">{{ $meet->meet_name }} || {{$meet->meet_date}}</button>
+        </div>
+            <div class="flex mb-4">
+                <div class="bg-green-100 w-full p-4 bg-white shadow-md rounded-lg mt-1 mx-2 text-center">
+                    <h3 style="font-weight: bold;">Date</h3>
+                    <div>{{ $meet->meet_date }}</div>
+                </div>
+                <div class="bg-green-100 w-full p-4 bg-white shadow-md rounded-lg mt-1 mx-2 text-center">
+                    <h3 style="font-weight: bold;">Time</h3>
+                    <div>{{ $meet->meet_time }}</div>
+                </div>
+                <div class="bg-green-100 w-full p-4 bg-white shadow-md rounded-lg mt-1 mx-2 text-center">
+                    <h3 style="font-weight: bold;">Place or URL</h3>
+                    <div>{{ $meet->meet_location }}</div>
+                </div>
+            </div>
+    </div>
+</div>
+@endforeach
+
+<!-- @if($meets->count() > 0) -->
+<!-- @else
+    <p>No meets available for this room.</p>
+@endif -->
+
+<!-- <div class="flex flex-col mx-2 my-5 md:mx-6 md:my-12 lg:my-12 lg:w-2/5 lg:mx-auto">
     <div class="bg-white shadow-md rounded-3xl p-4">
         <div class="flex-none"></div>
             {{-- Big square covering all details --}}
@@ -21,9 +50,10 @@
                 </div>
 
                 {{-- Small square for Meeting Time, Description, and Leaving URL --}}
-                <div class="p-4 bg-white shadow-md rounded-lg  mt-1 mx-2">
+                <div class="p-4 bg-white shadow-md rounded-lg  mt-1 mx-2"> -->
+
                     <!-- Show owner created Halaqah -->
-                    <div class="w-full flex-none mb-2 text-xs text-blue-700 font-medium" wire:offline.class.remove="text-blue-700" wire:offline.class="text-gray-400">
+                    <!-- <div class="w-full flex-none mb-2 text-xs text-blue-700 font-medium" wire:offline.class.remove="text-blue-700" wire:offline.class="text-gray-400">
                         @if ($room->user)
                             <a href="{{ route('profile', ['username' => $room->user->username]) }}">
                                 <img class="inline-block object-cover w-8 h-8 mr-1 text-white rounded-full shadow-sm cursor-pointer" wire:offline.class="filter grayscale" src="{{ $room->user->profile_photo_url }}" alt="{{ $room->user->name }}" />
@@ -43,21 +73,17 @@
             </div>
         </div>
     </div>
-</div>        
+</div> -->
 
 
-
-
-
-
-
-<div class="flex flex-col mx-2 my-5 md:mx-6 md:my-12 lg:my-12 lg:w-2/5 lg:mx-auto">
+<!-- <div class="flex flex-col mx-2 my-5 md:mx-6 md:my-12 lg:my-12 lg:w-2/5 lg:mx-auto">
     <div class="bg-white shadow-md rounded-3xl p-4">
         <div class="flex-none">
             <div class="p-4 bg-white shadow-md rounded-lg mx-2 mt-1">
-                <h2 style="font-size: 1.5rem; font-weight: bold;" class="mb-2">File Upload</h2>
+                <h2 style="font-size: 1.5rem; font-weight: bold;" class="mb-2">File Upload</h2> -->
+
                 <!-- Livewire File Upload Form -->
-                <form wire:submit.prevent="uploadFile" enctype="multipart/form-data">
+                <!-- <form wire:submit.prevent="uploadFile" enctype="multipart/form-data">
                     <div class="mb-4">
                         <x-jet-label for="file" value="{{ __('Choose File') }}" />
                         <x-jet-input id="file" type="file" class="mt-1 block w-full" wire:model="file" />
@@ -70,9 +96,10 @@
                     </div>
                 </form>
             </div>    
-            <div class="p-4 bg-white shadow-md rounded-lg mx-2 mt-1 overflow-x-auto">
+            <div class="p-4 bg-white shadow-md rounded-lg mx-2 mt-1 overflow-x-auto"> -->
+
                 <!-- Add this section to display uploaded files in a table -->
-                @if ($uploadedFiles && $uploadedFiles->count() > 0)
+                <!-- @if ($uploadedFiles && $uploadedFiles->count() > 0)
                     <div class="mt-4">
                         <h2 class="text-lg font-semibold mb-2">Uploaded Files:</h2>
                         <table class="min-w-full divide-y divide-gray-200">
@@ -106,9 +133,10 @@
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             {{ $file->created_at->format('M d, Y H:i:s') }}
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
+                                        <td class="px-6 py-4 whitespace-nowrap"> -->
+
                                             <!-- Add a delete button -->
-                                            <button wire:click="deleteFile({{ $file->id }})" class="text-red-500hover:underline">
+                                            <!-- <button wire:click="deleteFile({{ $file->id }})" class="text-red-500hover:underline">
                                                 Delete
                                             </button>
                                         </td>
@@ -121,4 +149,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
