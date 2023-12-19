@@ -1,8 +1,8 @@
-<nav x-data="{ open: false }" class="sticky top-0 left-0 z-50 right-0 bg-white shadow-md border-b border-gray-100">
+<nav x-data="{ open: false }" class="sticky top-0 left-0 z-50 right-0 bg-white shadow-md border-b border-gray-100 h-14">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-14">
-            <div class="flex items-center">
+    <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8 relative">
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 h-14">
+            <div class="flex items-center h-14">
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center justify-between">
                     <a href="{{ route('home') }}">
@@ -10,8 +10,8 @@
                     </a>
                 </div>
                 <!-- Search Bar -->
-                <form>   
-                    <label for="default-search" class="mb-2 text-sm font-medium text-gray   -900 sr-only dark:text-white">Search</label>
+                <form class="hidden sm:block"> <!-- Hide on screens less than 640px, show otherwise -->
+                    <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                     <div class="relative">
                         <div class="absolute inset-y-0 left-2 start-0 flex items-center ps-3 pointer-events-none">
                             <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -34,11 +34,11 @@
             
             <!-- Navigation Links -->
             <!-- Home -->
-            <div class="flex items-center w-2/5 grid grid-flow-col justify-stretch">
+            <div class="hidden sm:-my-px sm:ml sm:flex flex-grow justify-center">
                 <x-jet-nav-link 
                     href="{{ route('home') }}" 
                     :active="request()->routeIs('home')" 
-                    class="hover:bg-gray-200 flex justify-center items-center rounded-md h-14 mx-1" 
+                    class="hover:bg-gray-200 flex justify-center items-center rounded-md h-14 mx-1 flex-1" 
                     title="Home">
                     <svg 
                         xmlns="http://www.w3.org/2000/svg" 
@@ -59,7 +59,7 @@
                 <x-jet-nav-link 
                     href="{{ route('rooms.index') }}" 
                     :active="request()->routeIs('rooms.index')" 
-                    class="hover:bg-gray-200 flex justify-center items-center rounded-md h-14 mx-1"
+                    class="hover:bg-gray-200 flex justify-center items-center rounded-md h-14 mx-1 flex-1"
                     title="Halaqah">
                     <svg 
                         xmlns="http://www.w3.org/2000/svg" 
@@ -75,7 +75,7 @@
                 <x-jet-nav-link 
                     :href="route('profile', ['username' => Auth::user()->username ])" 
                     :active="request()->routeIs('profile')"
-                    class="hover:bg-gray-200 flex justify-center items-center rounded-md h-14 mx-1"
+                    class="hover:bg-gray-200 flex justify-center items-center rounded-md h-14 mx-1 flex-1"
                     title="explore">
                     <svg 
                         xmlns="http://www.w3.org/2000/svg" 
@@ -102,13 +102,11 @@
                 @endcan -->
             </div>
 
-            <div class="hidden sm:flex sm:items-center sm:ml-6">
+            <div class="hidden sm:flex sm:items-center sm:ml-auto">
                 <!-- Messenger -->
-                <x-jet-nav-link
-                    :href="route('profile', ['username' => Auth::user()->username ])" 
-                    :active="request()->routeIs('profile')"
+                <button 
                     class="hover:bg-gray-200 flex justify-center items-center rounded-md h-14 mx-1"
-                    title="Notifications">
+                    title="Messenger">
                     <svg 
                         xmlns="http://www.w3.org/2000/svg" 
                         fill="none" 
@@ -116,18 +114,16 @@
                         stroke-width="1.5"  
                         stroke="currentColor" 
                         class="w-7 h-7">
-                            <path 
+                        <path 
                             stroke-linecap="round" 
                             stroke-linejoin="round" 
                             d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" 
-                            />
+                        />
                     </svg>
-                </x-jet-nav-link>
+                </button>
 
                 <!-- Notification -->
-                <x-jet-nav-link
-                    :href="route('profile', ['username' => Auth::user()->username ])" 
-                    :active="request()->routeIs('profile')"
+                <button 
                     class="hover:bg-gray-200 flex justify-center items-center rounded-md h-14 mx-1"
                     title="Notifications">
                     <svg xmlns="http://www.w3.org/2000/svg" 
@@ -139,9 +135,10 @@
                         <path 
                             stroke-linecap="round" 
                             stroke-linejoin="round" 
-                            d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0M3.124 7.5A8.969 8.969 0 015.292 3m13.416 0a8.969 8.969 0 012.168 4.5" />
+                            d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0M3.124 7.5A8.969 8.969 0 015.292 3m13.416 0a8.969 8.969 0 012.168 4.5" 
+                        />
                     </svg>
-                </x-jet-nav-link>
+                </button>
 
                 <!-- Settings Dropdown -->
                 <div class="ml-3 relative">
@@ -233,7 +230,8 @@
             </div>
 
             <!-- Hamburger -->
-            <div class="-mr-2 flex items-center sm:hidden">
+    <!-- Hamburger -->
+            <div class="absolute inset-y-0 right-0 flex items-center sm:hidden">
                 <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
