@@ -21,8 +21,8 @@
     </div>
     @endif
 
-    <div class="flex flex-col mx-2 my-5 md:mx-6 md:my-12 lg:my-12 lg:w-2/5 lg:mx-auto">
-        <div class="bg-white shadow-md rounded-3xl p-4 justify-center">
+    <div class="flex flex-col mx-2 my-5 md:mx-6 md:my-12 lg:my-8 lg:w-2/5 lg:mx-auto">
+        <div class="bg-white shadow-md rounded-md p-4 justify-center">
             <div class="flex-none">
                 <div class="flex items-center justify-between" wire:offline.class.remove="text-blue-700" wire:offline.class="text-gray-400">
                     <div class="flex items-center text-xs text-blue-700 font-medium">
