@@ -22,19 +22,18 @@
     @endif
 
     <div class="flex flex-col mx-2 my-5 md:mx-6 md:my-12 lg:my-12 lg:w-2/5 lg:mx-auto">
-        <div class="bg-white shadow-md rounded-3xl p-4">
+        <div class="bg-white shadow-md rounded-3xl p-4 justify-center">
             <div class="flex-none">
-                <div class="flex items-center justify-between mb-2 text-xs text-blue-700 font-medium" wire:offline.class.remove="text-blue-700" wire:offline.class="text-gray-400">
-                    <div class="flex items-center">
+                <div class="flex items-center justify-between" wire:offline.class.remove="text-blue-700" wire:offline.class="text-gray-400">
+                    <div class="flex items-center text-xs text-blue-700 font-medium">
                         <a href="{{ route('profile', ['username' => $user->username]) }}">
                             <img class="inline-block object-cover w-8 h-8 mr-4 text-white rounded-full shadow-sm cursor-pointer" wire:offline.class="filter grayscale" src="{{ $user->profile_photo_url }}" alt="{{ $user->name }}" />
                         </a>
                     </div>
 
                     <div class="flex-grow ml-4 w-full">
-                        <button id="create_post" wire:click="showCreatePostModal" class="w-full bg-black text-white px-4 py-2 rounded-full focus:outline-none relative z-10" style="position: relative; z-index: 10; background-color: rgba(0, 0, 0, 0.7);">
+                        <button id="create_post" wire:click="showCreatePostModal" class="w-full bg-gray-200 font-bold py-2 px-4 rounded-full">
                             {{ __('Create Post ...') }}
-                            <div class="absolute top-0 left-0 h-full w-full bg-black opacity-75 z-0 rounded-full"></div>
                         </button>
                     </div>
 
