@@ -5,7 +5,7 @@
                 <div class="flex items-center justify-between">
                     <!-- search bar -->
                     <div class="flex-grow ml-4 w-4/5 justify-center sm:ml-auto mr-5">
-                        <form class="hidden sm:block"> <!-- Hide on screens less than 640px, show otherwise -->
+                        <form>
                             <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                             <div class="relative">
                                 <div class="absolute inset-y-0 left-2 start-0 flex items-center ps-3 pointer-events-none">
@@ -55,7 +55,7 @@
 
     <!-- Section for displaying the user's created Halaqah -->
     <div class="flex flex-col mx-2 my-5 md:mx-6 md:my-12 lg:my-8 lg:w-2/5 lg:mx-auto">
-        <div class="bg-white shadow-md p-4 justify-center">
+        <div class="bg-white shadow-md rounded-md p-4 justify-center">
             <div class="flex justify-center">
                 <h1 class="bg-gray-200 shadow-lg mx-3 w-full px-1 py-1 rounded-lg text-center font-bold text-xl">
                     MY HALAQAH
@@ -64,7 +64,70 @@
             <div class="flex justify-center">
                 <h1 class="w-full px-1 py-1  rounded-lg text-center">
                     @foreach ($createdRooms as $room)
-                        <hr>
+                        <div class="w-full mb-4 mt-4">
+                            <div class="h-flex bg-gray-100 shadow-lg  rounded-md  overflow-hidden justify-center align-middle mx-2">
+                                <div class="mt-2 mx-6">
+                                    <h2 class="text-center text-xl font-bold">{{ wordwrap($room->name, 45, "\n", true) }}</h2>
+                                </div>
+                                <div class="my-2 mx-4">
+                                    <p class="text-left text-sm"><strong>Description:</strong> {{ wordwrap($room->description, 45, "\n", true) }}</p>
+                                </div>
+
+                                <hr>
+
+                                <div class="my-2 mx-2">
+                                    <p class="text-center text-sm"><strong>Privacy:</strong> {{ wordwrap($room->privacy, 45, "\n", true) }}</p>
+                                </div>
+
+
+
+                                <!-- Show owner created Halaqah -->
+                                <div class="w-full flex-none mb-2 text-center text-xs text-blue-700 font-medium" wire:offline.class.remove="text-blue-700" wire:offline.class="text-gray-400">
+                                    @if ($room->user)
+                                        <a href="{{ route('profile', ['username' => $room->user->username]) }}">
+                                            <img class="inline-block object-cover w-8 h-8 mr-1 text-white rounded-full shadow-sm cursor-pointer" wire:offline.class="filter grayscale" src="{{ $room->user->profile_photo_url }}" alt="{{ $room->user->name }}" />
+                                            Created by {{ '@' . $room->user->username }}
+                                        </a>
+                                    @else
+                                        <span class="text-gray-500">Creator information not available</span>
+                                    @endif
+                                </div>
+
+
+
+                                <!-- Add other fields as needed -->
+
+                                <!-- Join Halaqah Button -->
+                                <div class="mt-4">
+                                    <x-jet-button wire:click="seeHalaqah('{{ $room->id }}', '{{ $room->name }}')" class="bg-orange-400">
+                                        {{ __('See Halaqah') }}
+                                    </x-jet-button>
+                                </div>
+
+                                <!-- Add free space at the bottom -->
+                                <div class="mb-2"></div>
+                            </div>
+                        </div>
+                        <hr><hr><hr><hr>
+                    @endforeach
+                </h1>
+            </div>
+        </div>
+    </div>
+    
+    <hr>
+
+    <!-- Section for displaying the user's joined Halaqah -->
+    <div class="flex flex-col mx-2 my-5 md:mx-6 md:my-12 lg:my-8 lg:w-2/5 lg:mx-auto">
+        <div class="bg-white shadow-md rounded-md p-4 justify-center">
+            <div class="flex justify-center">
+                <h1 class="bg-gray-200 shadow-md  mx-3 w-full px-1 py-1 rounded-lg text-center font-bold text-xl">
+                    JOINED HALAQAH
+                </h1>
+            </div>
+            <div class="flex justify-center">
+                <h1 class="w-full px-1 py-1  rounded-lg text-center">
+                    @foreach ($joinedRooms as $room)
                         <div class="w-full mb-4 mt-4">
                             <div class="h-flex bg-gray-100 shadow-lg  rounded-md  overflow-hidden justify-center align-middle mx-2">
                                 <div class="mt-2 mx-6">
@@ -105,75 +168,12 @@
                                     </x-jet-button>
                                 </div>
 
-                                <!-- Add free space at the bottom -->
-                                <div class="mb-2"></div>
-                            </div>
-                        </div>
-                    @endforeach
-                </h1>
-            </div>
-        </div>
-    </div>
-    
-    <hr>
-
-    <!-- Section for displaying the user's joined Halaqah -->
-    <div class="flex flex-col mx-2 my-5 md:mx-6 md:my-12 lg:my-8 lg:w-2/5 lg:mx-auto">
-        <div class="bg-gray-100 shadow-xl shadow-grey-500/50 rounded-md p-4 justify-center">
-            <div class="flex justify-center">
-                <h1 class="bg-gray-200 shadow-md  mx-3 w-full px-1 py-1 rounded-lg text-center font-bold text-xl">
-                    JOINED HALAQAH
-                </h1>
-            </div>
-            <div class="flex justify-center">
-                <h1 class="w-full px-1 py-1  rounded-lg text-center">
-                    @foreach ($joinedRooms as $room)
-                        <hr>
-                        <div class="w-full mb-4 mt-4">
-                            <div class="h-flex bg-white shadow-md overflow-hidden rounded-lg justify-center align-middle mx-2">
-                                <div class="mt-2 mx-6">
-                                    <h2 class="text-center text-xl font-bold">{{ wordwrap($room->name, 45, "\n", true) }}</h2>
-                                </div>
-                                <div class="my-2 mx-4">
-                                    <p class="text-left text-sm"><strong>Description:</strong> {{ wordwrap($room->description, 45, "\n", true) }}</p>
-                                </div>
-
-                                <hr>
-
-                                <div class="my-2 mx-2">
-                                    <p class="text-center text-sm"><strong>Privacy:</strong> {{ wordwrap($room->privacy, 45, "\n", true) }}</p>
-                                </div>
-
-                                <hr class="mb-3">
-
-                                <!-- Show owner created Halaqah -->
-                                <div class="w-full flex-none mb-2 text-center text-xs text-blue-700 font-medium" wire:offline.class.remove="text-blue-700" wire:offline.class="text-gray-400">
-                                    @if ($room->user)
-                                        <a href="{{ route('profile', ['username' => $room->user->username]) }}">
-                                            <img class="inline-block object-cover w-8 h-8 mr-1 text-white rounded-full shadow-sm cursor-pointer" wire:offline.class="filter grayscale" src="{{ $room->user->profile_photo_url }}" alt="{{ $room->user->name }}" />
-                                            Created by {{ '@' . $room->user->username }}
-                                        </a>
-                                    @else
-                                        <span class="text-gray-500">Creator information not available</span>
-                                    @endif
-                                </div>
-
-                                <hr>
-
-                                <!-- Add other fields as needed -->
-
-                                <!-- Join Halaqah Button -->
-                                <div class="mt-4">
-                                    <x-jet-button wire:click="seeHalaqah('{{ $room->id }}', '{{ $room->name }}')" class="bg-orange-400">
-                                        {{ __('See Halaqah') }}
-                                    </x-jet-button>
-                                </div>
-
 
                                 <!-- Add free space at the bottom -->
                                 <div class="mb-2"></div>
                             </div>
                         </div>
+                        <hr><hr><hr><hr>
                     @endforeach
                 </h1>
             </div>
